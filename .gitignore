@@ -1,0 +1,40 @@
+# Environnement Python / Conda
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+envs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Données (audio, texte brut, annotations)
+data/
+*.wav
+*.mp3
+*.ogg
+*.csv
+*.tsv
+*.json
+
+# Modèles et poids
+models/
+*.bin
+*.pt
+*.ckpt
+*.safetensors
+
+# Clés et secrets
+.env
+*.key
+secrets/
+
+# VS Code (optionnel — certains le versionnent, d'autres non)
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
