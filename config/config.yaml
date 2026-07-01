@@ -1,0 +1,38 @@
+# ═══════════════════════════════════════════════════════════
+#  Ñoo Far — Configuration du pipeline
+#  Paramètres NON-secrets uniquement. Les tokens vont dans .env
+# ═══════════════════════════════════════════════════════════
+
+lang: fr                    # fr | wo | ff ← commutateur de langue
+enhance_mode: denoise       # none | denoise | enhance
+
+models:
+  asr:
+    fr: openai/whisper-medium
+    wo: noofar-ia/whisper-wolof
+    ff: noofar-ia/whisper-pulaar
+  tts:
+    fr: facebook/mms-tts-fra
+    wo: noofar-ia/mms-tts-wolof
+    ff: facebook/mms-tts-ful
+
+  # Traduction NLLB-200 (fr → wo/ff) — préparation des fiches.
+  # Hors chemin critique du prototype français ; utile dès la bascule wolof.
+  translation:
+    model: facebook/nllb-200-distilled-600M
+    src_lang: fra_Latn
+    tgt_lang:
+      wo: wol_Latn
+      ff: fuv_Latn
+
+rag:
+  fiches_dir: rag/fiches      # /fr, /wo ou /ff ajouté selon lang
+  retrieval: hybrid           # semantic | hybrid (BM25 + embeddings)
+  top_k: 3
+  embedding_model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+
+whatsapp:
+  provider: twilio            # twilio | meta
+
+services:
+  rasa_url: http://localhost:5005    # service NLU (environnement séparé)
