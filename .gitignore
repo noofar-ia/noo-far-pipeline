@@ -8,16 +8,13 @@ envs/
 
 # Jupyter
 .ipynb_checkpoints/
-*.ipynb
+# (on versionne les .ipynb ; pense à vider les sorties avant commit)
 
-# Données (audio, texte brut, annotations)
+# Données (audio, texte brut, annotations) — tout vit dans data/
 data/
 *.wav
 *.mp3
 *.ogg
-*.csv
-*.tsv
-*.json
 
 # Modèles et poids
 models/
@@ -26,8 +23,13 @@ models/
 *.ckpt
 *.safetensors
 
+# Base vectorielle ChromaDB (régénérable)
+chroma/
+*.sqlite3
+
 # Clés et secrets
 .env
+config/.env
 *.key
 secrets/
 

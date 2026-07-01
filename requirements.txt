@@ -1,0 +1,28 @@
+# ── Cœur ML (ASR, traduction NLLB, TTS) ──
+torch
+transformers
+accelerate
+datasets
+sentencepiece          # tokenizer NLLB-200
+peft                   # fine-tuning LoRA (asr/train_lora.py)
+
+# ── Audio ──
+soundfile
+librosa
+
+# ── RAG (rag/) ──
+chromadb
+rank-bm25
+sentence-transformers
+
+# ── Application (app/) ──
+fastapi
+uvicorn[standard]
+python-multipart       # réception de fichiers dans le webhook
+gradio
+httpx                  # appels HTTP : Rasa, Twilio, médias WhatsApp
+
+# ── Intégrations & config ──
+twilio
+pyyaml                 # config/config.yaml
+python-dotenv          # config/.env
