@@ -1,0 +1,30 @@
+{
+  "name": "Ñoo Far — Pipeline",
+
+  // Image de base : Linux + Python 3.10 (aligné sur l'environnement noofar).
+  // Le conteneur EST l'isolation → pas besoin de conda ici.
+  "image": "mcr.microsoft.com/devcontainers/python:3.10",
+
+  // À la création du conteneur : ffmpeg (apt marche enfin, on est sous Linux)
+  // puis installation des dépendances depuis le lock (versions exactes).
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ffmpeg && pip install --upgrade pip && pip install -r requirements.lock.txt",
+
+  // Ports exposés quand tu lances les services (pour tester depuis le navigateur).
+  "forwardPorts": [7860, 8000, 5005],
+  "portsAttributes": {
+    "7860": { "label": "Gradio (démo)" },
+    "8000": { "label": "FastAPI (webhook)" },
+    "5005": { "label": "Rasa (NLU — à lancer à la main)" }
+  },
+
+  // Outils VS Code pré-installés dans le Codespace.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  }
+}
