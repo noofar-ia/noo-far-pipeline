@@ -1,0 +1,122 @@
+version: "3.1"
+
+nlu:
+  # ── Politesse ──────────────────────────────────────────────
+  - intent: salutation
+    examples: |
+      - bonjour
+      - bonsoir
+      - salut
+      - as-salamu alaykum
+      - assalamu aleikoum
+      - bonjour, j'ai une question
+      - coucou, tu peux m'aider
+      - bonjour je suis éleveur
+      - salam, j'ai besoin d'un conseil
+      - nanga def
+
+  - intent: au_revoir
+    examples: |
+      - au revoir
+      - merci
+      - merci beaucoup
+      - c'est tout, merci
+      - merci pour l'aide
+      - à bientôt
+      - jërëjëf
+      - ok merci bien
+      - c'est noté merci
+      - parfait, au revoir
+
+  # ── Santé animale (entité : symptome, maladie, animal) ─────
+  - intent: sante_animale
+    examples: |
+      - ma [vache](animal) a de la [fièvre](symptome)
+      - mon [veau](animal) fait de la [diarrhée](symptome)
+      - qu'est-ce que je fais si ma [génisse](animal) [boite](symptome)
+      - mes [bovins](animal) [toussent](symptome) beaucoup
+      - ma vache ne [mange plus](symptome) depuis deux jours
+      - comment soigner la [mammite](maladie)
+      - mon animal a des [plaies sur la peau](symptome)
+      - ma [vache](animal) est [maigre](symptome) et faible
+      - c'est quoi les signes de la [fièvre aphteuse](maladie)
+      - mon [zébu](animal) a le [ventre gonflé](symptome)
+      - que faire contre la [dermatose](maladie)
+      - ma bête a les [yeux qui coulent](symptome)
+      - mon troupeau est malade que faire
+
+  # ── Vaccination (entité : animal, maladie) ─────────────────
+  - intent: vaccination
+    examples: |
+      - quand dois-je vacciner mes [vaches](animal) ?
+      - quel est le calendrier de vaccination pour le [veau](animal)
+      - contre quelles maladies faut-il vacciner
+      - à quel âge vacciner une [génisse](animal)
+      - quels vaccins pour la [fièvre aphteuse](maladie)
+      - est-ce que je dois vacciner contre la [dermatose](maladie)
+      - il faut vacciner les [bovins](animal) à quelle période
+      - vaccination du bétail contre la [pasteurellose](maladie)
+      - combien de fois vacciner mon [zébu](animal) par an
+      - quel est le prix du vaccin contre la [fièvre aphteuse](maladie)
+      - mes [génisses](animal) ont besoin de quels vaccins
+      - rappel de vaccination pour le troupeau
+
+  # ── Alimentation (entité : animal) ─────────────────────────
+  - intent: alimentation
+    examples: |
+      - qu'est-ce que je donne à manger à ma [vache](animal)
+      - quelle ration pour une [vache](animal) laitière
+      - combien de fourrage par jour pour un [bovin](animal)
+      - mes [veaux](animal) mangent quoi
+      - quel complément alimentaire pour produire plus de lait
+      - comment nourrir le bétail en saison sèche
+      - est-ce que je peux donner du son à ma [vache](animal)
+      - quelle quantité d'eau pour une [vache](animal) par jour
+      - alimentation d'une [génisse](animal) en gestation
+      - quel aliment pour engraisser mes [bovins](animal)
+      - le foin suffit-il pour nourrir mon troupeau
+      - que donner à une [vache](animal) qui allaite
+
+  # ── Reproduction (entité : animal) ─────────────────────────
+  - intent: reproduction
+    examples: |
+      - comment savoir si ma [vache](animal) est en chaleur
+      - quand inséminer une [génisse](animal)
+      - combien de temps dure la gestation d'une [vache](animal)
+      - ma [vache](animal) va bientôt mettre bas que faire
+      - comment aider une [vache](animal) qui vêle
+      - à quel âge une [génisse](animal) peut être saillie
+      - signes qu'une [vache](animal) est pleine
+      - mon [taureau](animal) ne saillit pas
+      - combien de temps après le vêlage pour réinséminer
+      - insémination artificielle pour mes [vaches](animal)
+      - ma [vache](animal) n'arrive pas à tomber enceinte
+
+  # ── Production laitière (entité : animal) ──────────────────
+  - intent: production_laitiere
+    examples: |
+      - comment augmenter la production de lait de ma [vache](animal)
+      - ma [vache](animal) donne peu de lait
+      - combien de litres par jour pour une [vache](animal)
+      - pourquoi la production de lait a baissé
+      - comment améliorer la qualité du lait
+      - à quelle heure traire mes [vaches](animal)
+      - combien de fois traire par jour
+      - le lait de ma [vache](animal) a changé de goût
+      - comment conserver le lait après la traite
+      - ma [génisse](animal) vient de vêler, quand commence le lait
+      - la traite fait mal à ma [vache](animal)
+
+  # ── Conduite d'élevage (entité : animal) ───────────────────
+  - intent: conduite_elevage
+    examples: |
+      - comment aménager un enclos pour mes [vaches](animal)
+      - quelles règles d'hygiène pour l'étable
+      - comment gérer mon troupeau en saison des pluies
+      - combien d'espace faut-il par [bovin](animal)
+      - comment protéger mes [bêtes](animal) de la chaleur
+      - faut-il séparer les [veaux](animal) des mères
+      - comment nettoyer l'abreuvoir
+      - organisation d'une petite ferme laitière
+      - comment tenir un registre pour mon troupeau
+      - protéger les [vaches](animal) contre les moustiques

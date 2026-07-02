@@ -11,7 +11,7 @@ envs/
 # (on versionne les .ipynb ; pense à vider les sorties avant commit)
 
 # Données (audio, texte brut, annotations) — tout vit dans data/
-data/
+/data/
 *.wav
 *.mp3
 *.ogg

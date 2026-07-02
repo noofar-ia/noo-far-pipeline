@@ -1,0 +1,22 @@
+# ═══════════════════════════════════════════════════════════
+#  Ñoo Far — Domain NLU (déclaration des intents + entités)
+#  NLU pur : pas de responses/actions (le RAG gère la réponse).
+# ═══════════════════════════════════════════════════════════
+
+version: "3.1"
+
+intents:
+  - salutation              # bonjour, bonsoir, as-salamu alaykum
+  - au_revoir               # merci, au revoir
+  - sante_animale           # symptômes, maladies du bétail
+  - vaccination             # calendrier et types de vaccins
+  - alimentation            # rations, fourrage, compléments
+  - reproduction            # gestation, insémination, mise bas
+  - production_laitiere     # rendement, qualité du lait
+  - conduite_elevage        # logement, hygiène, gestion du troupeau
+  - nlu_fallback            # obligatoire (FallbackClassifier)
+
+entities:
+  - animal                  # vache, génisse, veau, taureau, zébu…
+  - maladie                 # fièvre aphteuse, mammite, dermatose…
+  - symptome                # fièvre, boiterie, diarrhée, toux…

@@ -1,0 +1,46 @@
+# ═══════════════════════════════════════════════════════════
+#  Ñoo Far — Configuration NLU Rasa
+#  Pipeline classique (sans embeddings pré-entraînés) :
+#  cohérent français + wolof, apprend depuis les exemples seuls.
+# ═══════════════════════════════════════════════════════════
+
+# Rasa 3.6 — recipe par défaut
+recipe: default.v1
+
+# Langue principale (le pipeline classique est indépendant de la langue,
+# ce champ sert surtout aux composants qui en tiennent compte)
+language: fr
+
+pipeline:
+  # 1. Découpe le texte en mots (tokens)
+  - name: WhitespaceTokenizer
+
+  # 2. Featurizers : transforment les mots en vecteurs numériques
+  #    a) motifs regex / lexicaux (utile pour dates, nombres…)
+  - name: RegexFeaturizer
+  #    b) caractéristiques lexicales (majuscules, préfixes/suffixes…)
+  - name: LexicalSyntacticFeaturizer
+  #    c) sacs de mots au niveau mot ET caractère
+  #       (le niveau caractère aide beaucoup pour les langues
+  #        peu dotées et les fautes de frappe)
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+
+  # 3. Le classifieur : intents + entités en un seul modèle
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
+
+  # 4. Synonymes d'entités (ex. "vache"/"génisse" → même valeur)
+  - name: EntitySynonymMapper
+
+  # 5. Repli : si la confiance est trop basse, intent "nlu_fallback"
+  - name: FallbackClassifier
+    threshold: 0.5
+
+# Pas de policies de dialogue : on fait du NLU pur.
+# L'intent extrait part directement vers le RAG côté pipeline.
+policies: []
