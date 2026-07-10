@@ -26,44 +26,132 @@
 
 C'est la phase la plus importante et la plus négligée. Prends le temps de la faire proprement — tu récupèreras chaque minute investie ici en évitant des heures de frustration ensuite.
 
-### 1.1 — Localiser et comprendre le corpus KALLAAMA
+### 1.1 — Fiche d'identité du corpus KALLAAMA
 
-**À trouver :**
-- La **source officielle** du corpus KALLAAMA — probablement sur Hugging Face (`https://huggingface.co/datasets/...`) ou sur un site académique (ISRA, UGB, GitHub d'un chercheur).
-- La **licence** — indispensable pour ton dossier de projet et pour savoir si tu peux redistribuer.
-- La **taille totale** (Go) — pour anticiper le téléchargement.
-- Le **format audio** (WAV, MP3, FLAC ?), la **fréquence d'échantillonnage** (8 kHz, 16 kHz, 44.1 kHz ?), le **nombre de canaux** (mono/stéréo).
-- La **structure des fichiers de transcription** — confirmer que ce sont bien des `.trs` (Transcriber XML) et pas un autre format.
-- Le **nombre total d'heures** de parole annotée.
-
-**Actions :**
-- Google : `KALLAAMA dataset wolof` — trouver la source officielle.
-- Lire l'article scientifique ou le README associé (souvent un papier court accompagne le corpus).
-- Noter la citation bibliographique (auteurs, année, titre, DOI si présent) — tu la réutiliseras dans ton rapport baseline (S4).
-
-**À documenter dans ta note de préparation** (peut être un simple bloc markdown en début de notebook plus tard) :
+**Informations collectées lors de la préparation (à insérer en tête du notebook) :**
 
 ```
 Corpus : KALLAAMA
-Source : [URL]
-Auteurs : [noms]
-Licence : [MIT / CC-BY / autre]
-Taille : [X Go, Y heures]
-Format audio : [WAV 16 kHz mono ? ou autre]
-Format transcription : Transcriber .trs (XML)
+Titre complet : "A Transcribed Speech Dataset about Agriculture
+                 in the Three Most Widely Spoken Languages in Senegal"
+Année : 2023 (production) / 2024 (publication)
+Thématique : AGRICULTURE — alignement direct avec Ñoo Far
+
+Porteur : Jokalante (Dakar, Sénégal)
+Partenaires : Orange Innovation (Lannion, France),
+              École Polytechnique de Thiès (Sénégal)
+Financement : Lacuna Fund
+
+Langues : wolof (wol), pulaar (fuc), sereer (srr)
+Format audio : WAV, 16 kHz, 16 bits, mono
+Format transcription : .stm (NIST — priorité pour ce projet)
+                       .trs (Transcriber XML — également disponible)
+
+Licence : Creative Commons Attribution 4.0 International (CC-BY 4.0)
+          → autorise usage commercial, modification, redistribution
+          → obligation : attribution (auteurs, licence, lien)
 ```
 
-### 1.2 — Lire la documentation du corpus (15 min)
+**Volumes (wolof, langue prioritaire) :**
 
-Avant de manipuler un seul fichier, lis le README / la doc / le papier. Cherche spécifiquement :
+| Set | Fichiers | Audio total | Parole annotée |
+|-----|----------|-------------|----------------|
+| Whole (complet) | 153 | 55h11 | 51h08 |
+| **Checked (vérifié)** | **36** | **12h49** | **11h47** |
 
-- Les **conventions d'annotation** : que signifient les crochets (`[rire]`, `[bruit]`), les parenthèses, les tags spéciaux ? Y a-t-il des marqueurs de code-switching wolof-français ?
-- Les **codes des locuteurs** (`spk1`, `spk2`, ou autres conventions).
-- Les **variantes orthographiques du wolof** utilisées (le wolof a plusieurs orthographes en usage : orthographe académique avec `ë`, `ñ`, ou orthographe francisée).
-- L'**encodage** des fichiers `.trs` — souvent ISO-8859-1 pour les vieux Transcriber, parfois UTF-8. **Point critique** pour les caractères wolof.
-- Les **conditions d'enregistrement** : studio ? terrain ? téléphone ? Ça explique la variabilité audio que tu vas observer.
+> **Décision méthodologique :** utiliser le **checked set** pour toute évaluation
+> (mini-projet + WER baseline S2), le whole set pour l'entraînement en phase MVP.
+> Comparer Whisper à des transcriptions non vérifiées mesure autant les erreurs
+> du corpus que celles du modèle — le checked set est le seul honnête pour un WER.
 
-Note ce que tu apprends — ça alimentera ta cellule de synthèse à la fin.
+**Typologie et complexité (échelle 1-5 fournie par les auteurs) :**
+
+| Type ID | Type | Wolof | Pulaar | Sereer |
+|---------|------|-------|--------|--------|
+| 1 | push message | 9 | 1 | 0 |
+| 2 | voice message | 0 | 0 | 14 |
+| 3 | interview | 22 | 10 | 15 |
+| 4 | radio show | **120** | 72 | 67 |
+| 5 | focus group | 2 | 0 | 9 |
+
+> **À noter** : 78% du wolof est du radio show. Ces radio shows sont
+> **agricoles** (thématique du corpus) — le vocabulaire est déjà proche
+> du domaine Ñoo Far. Écart corpus/production plus faible qu'un corpus généraliste.
+
+**Distribution de genre (biais à documenter) :**
+
+- Parole masculine : **88.78%** (wolof)
+- Parole féminine : **11.22%** (wolof)
+
+> **Enjeu de biais** : Whisper zéro-shot risque d'être plus performant sur les
+> voix masculines. Ton public cible (éleveuses ET éleveurs) exige une évaluation
+> **séparée par genre** dans le rapport baseline S4. Le label `<o,f0,female>` /
+> `<o,f0,male>` dans les `.stm` permet ce diagnostic.
+
+**Convention de nommage des fichiers :**
+
+Format : `<ISO 639-2>_<type_id>_<dirname_id>_<file_id>_<subpart>`
+
+Exemple : `wol_43612` = wolof, type 4 (radio show), dossier 36, fichier 1, sous-partie 2
+
+> **Utilité pratique** : filtrer intelligemment les 3 audios du mini-projet en
+> décodant le nom (choisir un `type_id=1` pour audio "facile", un long radio
+> show pour audio "complexe").
+
+**Citation bibliographique (BibTeX pour dossier et README) :**
+
+```bibtex
+@inproceedings{kallaama2024dataset,
+  title={Kallaama: A Transcribed Speech Dataset about Agriculture
+         in the Three Most Widely Spoken Languages in Senegal},
+  author={Gauthier, Elodie and Ndiaye, Aminata and Guissé, Abdoulaye},
+  booktitle={Proceedings of the Fifth workshop on Resources for
+             African Indigenous Languages (RAIL 2024)},
+  year={2024}
+}
+```
+
+> **Ancrage écosystème** : RAIL est LE workshop des langues africaines en NLP,
+> Lacuna Fund est le fonds de référence pour combler les lacunes de données IA
+> en Afrique. Deux ancrages qui s'inscrivent visiblement dans l'écosystème
+> Masakhane — à mentionner dans ton dossier de bourse.
+
+### 1.2 — Conventions d'annotation KALLAAMA (à connaître avant tout code)
+
+Le corpus a **deux conventions d'annotation** clairement définies. C'est un atout majeur — tu peux les exploiter pour des analyses différenciées.
+
+**Convention 1 — Disfluences (préfixe `%`)**
+
+Un token commençant par `%` marque une hésitation ou un marqueur discursif :
+- Exemples : `%e`, `%hum`
+- Exemple en corpus : `wol_43611.trs: %e prévision : fra météo :fra yi xibaar yi si jaww ji`
+
+**Convention 2 — Emprunts / code-switching (suffixe `:lang`)**
+
+Un token suivi de `:<code_langue>` marque un emprunt à une autre langue :
+- Exemples : `météo :fra`, `microphone :fra`, `bisimilah :ar`, `marketing :en`
+- Un exemple particulièrement riche : `wol_43112.trs: bisimilah :ar donc :fra looy yok`
+  → wolof + mot arabe + mot français dans la même phrase (réalité linguistique sénégalaise)
+
+**Variantes à gérer dans le parsing** (annotateurs pas toujours cohérents) :
+- ISO 639-2 (`:fra`) OU ISO 639-1 (`:fr`) — les deux existent
+- Espace parfois ajouté avant les deux-points (`accompagnement : fra`)
+- La fonction de nettoyage doit être **tolérante** à ces variations
+
+**Implications stratégiques :**
+
+- **Le code-switching est BALISÉ** → tu peux calculer un WER différencié :
+  - WER sur segments 100% wolof (aucun `:lang`)
+  - WER sur segments avec code-switching (par langue empruntée)
+  - Le vrai chiffre à donner dans le rapport baseline n'est pas un WER moyen mais ces sous-mesures
+
+- **Les disfluences `%` peuvent gonfler artificiellement le WER** si non traitées.
+  Deux WER à calculer : avec disfluences (test dur) et sans (test standard).
+
+**Encodage des fichiers texte :**
+À vérifier en ouvrant un `.stm` ou `.trs` dans VS Code (indicateur en bas à droite).
+Probablement UTF-8 pour `.stm` (format récent) ; possiblement ISO-8859-1 pour `.trs`.
+Point critique pour les caractères wolof `ë`, `ñ`, `à`.
 
 ### 1.3 — Préparer l'environnement technique (15 min)
 
@@ -200,88 +288,114 @@ Si tu as le temps, itérer sur les fichiers pour récupérer les durées via `li
 ---
 
 <a name="étape-3"></a>
-## 4. Étape 3 — Écrire le parseur `.trs` (~1h)
+## 4. Étape 3 — Écrire le parseur `.stm` (~45 min)
 
-C'est le cœur technique du mini-projet. Une fonction propre et réutilisable — tu la reprendras en S2 pour le WER baseline.
+**Choix de format : `.stm` plutôt que `.trs`.** KALLAAMA fournit les deux formats. Le `.stm` (NIST Segment Time Mark) est **le standard international d'évaluation ASR**, plus simple à parser, aligné sur les conventions du domaine. C'est ce que tu utiliseras pour ce mini-projet ET pour le WER baseline en S2.
 
-### 4.1 — Comprendre la structure d'un `.trs`
+### 4.1 — Structure d'un fichier `.stm`
 
-Ouvre un `.trs` dans VS Code et observe. Structure XML type :
+Format texte plat, ligne par ligne :
 
-```xml
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<Trans scribe="..." audio_filename="..." version="...">
-  <Speakers>
-    <Speaker id="spk1" name="..." />
-  </Speakers>
-  <Episode>
-    <Section type="report" startTime="0" endTime="245.3">
-      <Turn speaker="spk1" startTime="0.0" endTime="12.4">
-        <Sync time="0.0"/>
-        texte du premier segment
-        <Sync time="5.2"/>
-        texte du segment suivant
-      </Turn>
-    </Section>
-  </Episode>
-</Trans>
+```
+<nom_fichier> <canal> <locuteur> <debut> <fin> <label> <transcription>
 ```
 
-**Point crucial :** le texte n'est PAS dans la balise `<Sync>`, il est **après** — dans son attribut `.tail` en `xml.etree`.
+Exemple concret :
+
+```
+wol_43611 1 spk1 0.00 5.24 <o,f0,female> texte transcrit du segment
+```
+
+Le label `<o,f0,female>` (ou `<o,f0,male>`) est précieux — il donne le **genre du locuteur**, utile pour l'analyse par genre du WER.
 
 ### 4.2 — Coder la fonction
 
 ```python
-import xml.etree.ElementTree as ET
-
-def parse_trs(trs_path, encoding="ISO-8859-1"):
+def parse_stm(stm_path, encoding='utf-8'):
     """
-    Parse un fichier Transcriber .trs et retourne la liste des segments.
-
-    Retourne : liste de dicts {start, end, text, speaker}
+    Parse un fichier NIST STM et retourne la liste des segments.
+    
+    Retourne : liste de dicts {file, channel, speaker, start, end, label, text}
     """
-    with open(trs_path, encoding=encoding) as f:
-        tree = ET.parse(f)
-    root = tree.getroot()
     segments = []
-
-    for turn in root.iter("Turn"):
-        speaker = turn.get("speaker", "?")
-        turn_end = float(turn.get("endTime"))
-        syncs = turn.findall("Sync")
-
-        for i, sync in enumerate(syncs):
-            start = float(sync.get("time"))
-            end = float(syncs[i + 1].get("time")) if i + 1 < len(syncs) else turn_end
-            text = (sync.tail or "").strip()
-            if text:
-                segments.append({
-                    "start": start,
-                    "end": end,
-                    "text": text,
-                    "speaker": speaker,
-                })
-
+    with open(stm_path, encoding=encoding) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith(';;'):  # commentaires STM
+                continue
+            parts = line.split(maxsplit=6)
+            if len(parts) < 7:
+                continue
+            segments.append({
+                "file": parts[0],
+                "channel": parts[1],
+                "speaker": parts[2],
+                "start": float(parts[3]),
+                "end": float(parts[4]),
+                "label": parts[5],
+                "text": parts[6],
+            })
     return segments
 ```
 
-### 4.3 — Tester la fonction
+### 4.3 — Fonction de nettoyage pour le WER
+
+Le texte brut contient les conventions KALLAAMA (`%` disfluences, `:lang` emprunts). Pour comparer à Whisper, il faut nettoyer :
 
 ```python
-segments = parse_trs("../data/kallaama/audio_001.trs")
+import re
+
+def clean_text_for_wer(text, strip_disfluencies=True, strip_lang_tags=True):
+    """
+    Nettoie une transcription KALLAAMA pour le calcul du WER.
+    
+    - Disfluences (%e, %hum) : optionnellement retirées
+    - Tags de langue (:fra, :en, :ar, :fr...) : optionnellement retirés
+      (on garde le mot emprunté, on retire juste le tag)
+    """
+    if strip_lang_tags:
+        # Gère :fra, :fr, : fra, : fr — tolérant aux variations d'annotateurs
+        text = re.sub(r'\s*:\s*[a-z]{2,3}\b', '', text)
+    
+    if strip_disfluencies:
+        # Retire les tokens commençant par %
+        text = re.sub(r'\s*%\S+\s*', ' ', text)
+    
+    # Normaliser les espaces multiples
+    text = re.sub(r'\s+', ' ', text).strip()
+    
+    return text
+```
+
+**Stratégie recommandée** : dans ton DataFrame de segments, garder les deux versions :
+- `text_raw` : brut (avec `%` et `:lang`) — utile pour analyse fine
+- `text_clean` : nettoyé — utilisé pour le WER
+
+### 4.4 — Tester les fonctions
+
+```python
+segments = parse_stm("../data/kallaama/wol_XXX.stm")
 print(f"Nombre de segments : {len(segments)}")
+
+# Décompte par genre (utile pour l'analyse de biais)
+from collections import Counter
+genres = Counter("female" if "female" in s["label"] else "male" for s in segments)
+print(f"Genres : {dict(genres)}")
+
+# Aperçu de segments avec nettoyage
 for seg in segments[:5]:
-    print(f"[{seg['start']:.1f}s → {seg['end']:.1f}s | {seg['speaker']}] {seg['text']}")
+    clean = clean_text_for_wer(seg["text"])
+    print(f"[{seg['start']:.1f}s → {seg['end']:.1f}s | {seg['speaker']}]")
+    print(f"  Brut    : {seg['text']}")
+    print(f"  Nettoyé : {clean}")
 ```
 
 **Points à vérifier :**
-- Les caractères wolof (`ë`, `ñ`) s'affichent correctement — sinon, l'encodage est faux.
-- Les timestamps sont croissants et cohérents.
-- Le texte n'est pas vide (sinon, tu utilises `.text` au lieu de `.tail`).
+- Les caractères wolof (`ë`, `ñ`) s'affichent correctement — sinon, l'encodage est faux (essayer `encoding='iso-8859-1'`)
+- Les timestamps sont croissants et cohérents
+- Le nettoyage retire bien `:fra`, `%e`, etc.
 
-### 4.4 — Fonction utilitaire : segment audio
-
-Fonction qui découpe un segment temporel de l'audio :
+### 4.5 — Fonction utilitaire : extraction de segment audio
 
 ```python
 def extract_segment(audio, sr, start, end):
@@ -290,6 +404,10 @@ def extract_segment(audio, sr, start, end):
 ```
 
 C'est court, mais c'est le geste fondamental — l'illustration parfaite qu'un audio est un array NumPy qu'on découpe par indices calculés à partir des temps.
+
+### 4.6 — Note sur le `.trs` (optionnel, pour information)
+
+Si tu veux comparer les deux formats à titre pédagogique, un parser `.trs` équivalent nécessite `xml.etree.ElementTree`, gérer la structure hiérarchique `Turn → Sync`, et attention au piège : **le texte est dans `sync.tail` (pas `sync.text`)**. C'est plus complexe et sujet à erreurs — d'où le choix du `.stm` pour ce projet.
 
 ---
 
@@ -315,16 +433,26 @@ print(f"Fichier : {Path(audio_path).name}")
 print(f"Durée : {duree:.1f}s | Sample rate : {sr} Hz | Canaux : mono")
 ```
 
-**B. Segments (parsing) :**
+**B. Segments (parsing `.stm` + genre + nettoyage) :**
 
 ```python
-segments = parse_trs(trs_path)
+segments = parse_stm(stm_path)
 df_seg = pd.DataFrame(segments)
 df_seg["duration"] = df_seg["end"] - df_seg["start"]
+df_seg["text_clean"] = df_seg["text"].apply(clean_text_for_wer)
+df_seg["gender"] = df_seg["label"].apply(
+    lambda l: "female" if "female" in l else "male"
+)
 
 print(f"Nombre de segments : {len(df_seg)}")
 print(f"Durée moyenne : {df_seg['duration'].mean():.1f}s")
 print(f"Locuteurs : {df_seg['speaker'].unique().tolist()}")
+print(f"Genres : {df_seg['gender'].value_counts().to_dict()}")
+
+# Repérer segments avec code-switching (utile pour synthèse)
+df_seg["has_codeswitch"] = df_seg["text"].str.contains(r':\s*[a-z]{2,3}\b', regex=True)
+print(f"Segments avec code-switching : {df_seg['has_codeswitch'].sum()}/{len(df_seg)}")
+
 df_seg.head()
 ```
 
@@ -402,34 +530,61 @@ Cellule markdown finale du notebook. Pas un rapport formel — quelques observat
 ```markdown
 ## Synthèse
 
-### Comparaison des 3 audios
-| Fichier | Durée | Segments | Locuteurs | Observations |
-|---------|-------|----------|-----------|--------------|
-| audio_001 | 2min | 15 | 1 | Voix claire, studio |
-| audio_002 | 3min | 22 | 1 | Bruit de fond, terrain |
-| audio_003 | 1min30 | 12 | 2 | Code-switching wo/fr visible |
+### Comparaison des 3 audios (checked set)
+
+| Fichier | Type | Rating | Durée | Segments | Genres | Code-switching | Complexité audio |
+|---------|------|--------|-------|----------|--------|----------------|------------------|
+| wol_XXX | push message | 1 | 2min | 15 | 1 M | non | claire |
+| wol_YYY | radio show | 4 | 30min | 200 | 3 M / 1 F | oui (fra) | radio, propre |
+| wol_ZZZ | radio show | 5 | 45min | 350 | 4 M / 2 F | oui (fra+ar) | radio, bruit ambiant |
 
 ### Ce que j'ai observé sur le corpus
+
+**Sur la parole :**
+- ...
+
+**Sur les conventions d'annotation :**
+- Disfluences `%e`, `%hum` présentes dans X% des segments
+- Code-switching avec le français : Y% des segments
+- Emprunts arabes (bisimilah) présents dans les émissions religieuses/culturelles
+- ...
+
+**Sur le biais de genre observé dans mes 3 audios :**
+- Répartition : ... (à comparer au 88.8% masculin global du corpus)
 - ...
 
 ### Difficultés anticipées pour Whisper zéro-shot
-- Vocabulaire technique wolof (élevage) probablement pas dans le pré-entraînement
-- Code-switching wolof-français fréquent
-- Variabilité des conditions d'enregistrement
+
+- Vocabulaire technique agricole/élevage wolof probablement peu représenté
+  dans le pré-entraînement Whisper
+- Code-switching wolof-français fréquent → risque de bascule de langue par Whisper
+- Variabilité des conditions d'enregistrement (studio radio vs terrain)
+- Voix féminines sous-représentées → performance probablement dégradée
 - ...
 
-### Conventions d'annotation détectées
-- `[rire]`, `[bruit]` : événements non-verbaux
-- `(mot)` : mot incertain pour le transcripteur
-- ...
+### Décisions méthodologiques pour la S2 (WER baseline)
 
-### Pour la S2 (WER baseline wolof)
-- Nettoyer les annotations avant comparaison
-- Attention à l'encodage
-- ...
+- **Set d'évaluation** : checked set (12h49 wolof, 36 fichiers) — seul honnête
+- **Nettoyage avant WER** : retirer `%<disfluence>` et `:<lang>` (fonction déjà écrite)
+- **WER à calculer** :
+  - Global (sur checked set complet)
+  - Par genre (masculin vs féminin) — pour révéler le biais
+  - Par présence de code-switching (segments purs vs mixtes)
+- **Sample de test** : viser 30-50 énoncés variés, échantillonnés dans les 3 catégories
+  de complexité (rating 1-2, 3, 4-5)
+- **Encodage** : ... (documenté ici après vérification)
+
+### Points ouverts pour l'analyse d'erreurs S4
+
+- Les disfluences non transcrites par Whisper vont-elles gonfler artificiellement
+  le WER ? (comparer WER avec/sans disfluences)
+- Le code-switching wolof-français est-il mieux géré que le wolof pur ?
+  (Whisper connaît le français, donc peut-être...)
+- La proximité thématique agricole du corpus se traduit-elle par une bonne
+  performance sur ces mots-clés ?
 ```
 
-Cette synthèse est ton livrable **intellectuel** — elle prépare ton travail des semaines suivantes.
+Cette synthèse est ton livrable **intellectuel** — elle prépare ton travail des semaines suivantes, particulièrement le rapport baseline de S4.
 
 ---
 
@@ -475,27 +630,45 @@ Vérifie que **seul le notebook** est ajouté (les audios dans `data/` doivent r
 <a name="vigilance"></a>
 ## 8. Points de vigilance
 
-Trois choses qui peuvent te faire perdre du temps si tu ne les anticipes pas.
+Quatre choses qui peuvent te faire perdre du temps ou dégrader la qualité de l'évaluation si tu ne les anticipes pas.
 
-### 8.1 — L'encodage des `.trs`
+### 8.1 — Puiser dans le CHECKED set (36 fichiers wolof), pas le whole set
 
-Symptôme : les caractères wolof (`ë`, `ñ`, `à`) apparaissent mangés (`Ã«`, `Ã±`) dans les résultats.
+Le corpus contient 153 fichiers wolof, mais seulement 36 ont des transcriptions **vérifiées humainement**. Pour ce mini-projet et le WER baseline S2, **utiliser exclusivement le checked set** — sinon tu compares Whisper à des transcriptions potentiellement fautives.
 
-Cause : le fichier est en ISO-8859-1 mais Python le lit en UTF-8 par défaut.
+Le checked set se trouve dans un sous-dossier dédié du corpus (à confirmer lors du téléchargement, souvent `checked/` ou similaire).
 
-Solution : toujours ouvrir avec l'encodage explicite (voir la fonction `parse_trs` — paramètre `encoding="ISO-8859-1"`). Si le fichier est en UTF-8, essaie sans le paramètre ou avec `encoding="utf-8"`.
+### 8.2 — Choisir 3 audios avec gradation intentionnelle de complexité
 
-**Test rapide :** ouvrir un `.trs` dans VS Code — en bas à droite, VS Code affiche l'encodage détecté.
+Le corpus fournit une **échelle de complexité 1-5** par type de programme. Utilise-la :
 
-### 8.2 — Les segments multi-locuteurs
+- **Audio 1 (facile)** — `type_id=1` (push message) ou `type_id=3` court (interview), rating 1-2
+- **Audio 2 (difficile)** — `type_id=4` (radio show), rating 4-5, idéalement multi-locuteurs
+- **Audio 3 (varié)** — `type_id=3` ou `4`, code-switching wolof-français visible dans le `.stm`
 
-Certains `Turn` ont plusieurs locuteurs (attribut `speaker="spk1 spk2"` avec des balises `<Who>` à l'intérieur). Le parseur ci-dessus les traite comme un locuteur unique — c'est OK pour ce mini-projet.
+Cette gradation intentionnelle rendra ta synthèse comparative bien plus riche qu'un choix aléatoire.
 
-Si un audio est majoritairement multi-locuteurs, note-le dans ta synthèse mais ne bloque pas dessus.
+### 8.3 — L'encodage des fichiers texte
 
-### 8.3 — Ne pas viser la perfection
+Symptôme : les caractères wolof (`ë`, `ñ`, `à`) apparaissent mangés (`Ã«`, `Ã±`).
 
-L'objectif est de **te confronter au corpus**, pas de produire une analyse exhaustive. Trois audios suffisent largement pour l'intuition. Si un audio te résiste (fichier corrompu, encodage bizarre, `.trs` mal formé), **passe au suivant**. Ne t'entête pas.
+**Test rapide, à faire une seule fois** : ouvre un `.stm` dans VS Code — en bas à droite, l'indicateur affiche l'encodage détecté. Note-le, tu sauras une fois pour toutes.
+
+- Si UTF-8 : `parse_stm(path)` (paramètre par défaut)
+- Si ISO-8859-1 : `parse_stm(path, encoding='iso-8859-1')`
+
+### 8.4 — Documenter le biais de genre dans la synthèse
+
+88.8% de la parole wolof est masculine. Ce n'est pas ton problème, c'est un fait du corpus — **à documenter, pas à cacher**. Dans ta synthèse :
+
+- Compter les segments féminins vs masculins dans tes 3 audios (via le label `<o,f0,female>` / `<o,f0,male>` des `.stm`)
+- Noter que le rapport baseline S4 devra calculer un **WER séparé par genre** pour révéler ou infirmer ce biais dans les performances de Whisper
+
+C'est le type de rigueur méthodologique qu'un évaluateur Masakhane cherche.
+
+### 8.5 — Ne pas viser la perfection
+
+L'objectif est de **te confronter au corpus**, pas de produire une analyse exhaustive. Trois audios suffisent largement pour l'intuition. Si un audio te résiste (fichier corrompu, encodage bizarre, `.stm` mal formé), **passe au suivant**. Ne t'entête pas.
 
 Si tu bloques plus de 30 min sur un problème technique unique, c'est un signal — pose la question, mets une note dans le notebook, avance.
 
