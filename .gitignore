@@ -39,4 +39,5 @@ secrets/
 # Fichiers système
 .DS_Store
 Thumbs.db
-desktop.iniconfig/env
+desktop.ini
+
