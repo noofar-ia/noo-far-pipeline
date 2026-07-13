@@ -23,4 +23,20 @@
 
 **Usage prévu, pour mémoire :** faciliter le travail des transcripteurs humains en préparation/enrichissement de corpus terrain — **pas** une brique du pipeline de production temps réel (celui-ci reçoit l'audio brut, Whisper le traite directement). Le report n'est donc pas bloquant pour le prototype français (S1) ni pour la phase baseline.
 
+## 13 juillet 2026 — Déploiement serveur : différé après la phase baseline
+
+**Contexte.** Question posée en préparant le test Twilio (réception de messages via webhook) : à quel moment déployer Ñoo Far sur un vrai serveur, plutôt que de tester en local avec un tunnel temporaire (ngrok) ?
+
+**Décision : pas de déploiement serveur avant la fin de la phase baseline (après le 9 août).** Le développement et les tests (S1 à S4) continuent avec ngrok + Codespace comme environnements de test, sans serveur permanent.
+
+**Raisons :**
+- L'architecture n'est pas encore figée — l'arbitrage RAG hybride vs sémantique (S2) et l'arbitrage LLM génération vs extraction directe (S4) détermineront ce qu'il y a réellement à déployer. Déployer avant ces décisions reviendrait à figer une version probablement obsolète en quelques semaines.
+- Un serveur a un coût récurrent, à justifier une fois l'architecture connue plutôt qu'anticipé sur des hypothèses.
+- ngrok (tunnel temporaire) + Codespace suffisent largement aux besoins actuels : prouver que le mécanisme (webhook, réception, traitement, réponse) fonctionne, produire des démos ponctuelles (vidéos Loom), sans nécessiter une disponibilité 24/7.
+
+**Le bon moment identifié : au cadrage de la phase MVP, rapport baseline en main.** À ce moment, trois éléments seront connus et guideront le choix d'infrastructure : l'architecture retenue (donc les ressources nécessaires — un LLM actif est plus lourd qu'une simple extraction), le besoin réel de disponibilité continue (tests par l'équipe, démos à ISRA/UGB/Banaan Food), et la stratégie de monétisation du projet (qui interagit avec la question de licence MMS/CC-BY-NC déjà notée).
+
+**Exception possible avant cette échéance :** si des démos par des tiers externes (Banaan Food, ISRA) sont nécessaires avant le 9 août, un déploiement minimal et temporaire (type Render.com ou Railway.app, tier gratuit) pourrait se justifier ponctuellement, uniquement pour stabiliser une URL de démo — à évaluer au cas par cas, non planifié par défaut.
+
+---
 ---
