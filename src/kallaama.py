@@ -11,6 +11,7 @@ import pandas as pd
 CODES = r"fra|fre|fr|fa|ra|frs|en|eng|ang|an|ar|poul"
 CS = rf":\s*(?:{CODES})\b"
 
+
 CORRECTIONS = {
     ":fr abi":     ":fra bi",              # wol_4112 — espace décalé
     "c' :est":     "c'est :fra",            # wol_43512, wol_4410 — tag mangé # PROVISOIRE — revoir avec la règle apostrophe (nb2)
@@ -22,6 +23,12 @@ CORRECTIONS = {
     ":;fra":        ":fra"                # wol_4510 — faute de frappe ajout ;
 
 }
+
+
+SPEAKER_CORRECTIONS = {
+    "2_EMISSION_FAPAL_2021_2_corrige_locuteur_2": "locuteur_2",
+}
+
 
 # ── Parsing ───────────────────────────────────────────────
 def parse_stm (stm_path, encoding = "utf-8") :
@@ -86,6 +93,7 @@ def parse_label(label):
         "genre": parts[2],
     }
 
+
 # ── Nettoyage ─────────────────────────────────────────────
 def clean_stm_annotations(text):
     #0. corrections
@@ -149,6 +157,13 @@ def normalize_for_wer(text, lower=True, strip_punct=True,
     return text
 
 
+def nettoyer_speaker(s):
+    if s in SPEAKER_CORRECTIONS:
+        return SPEAKER_CORRECTIONS[s]
+    if s == "inter_segment_gap":
+        return "non_etiquete"   # texte réel mais locuteur non déterminé
+    return s
+
 # ── Chargement ────────────────────────────────────────────
 def extract_segment(audio, sr, start, end):
     """Retourne l'array audio correspondant au segment [start, end] en secondes."""
@@ -175,6 +190,8 @@ def load_corpus(checked_dir):
     df["usable"] = df["raison"] == "ok"
     df["has_codeswitch"] = df["text"].str.contains(CS, case=False, regex=True)
     df["n_tags"] = df["text"].str.count(CS)
+    df["speaker_brut"] = df["speaker"]
+    df["speaker"] = df["speaker"].apply(nettoyer_speaker)
 
     
     return df,stats_tous
