@@ -122,6 +122,33 @@ def is_usable(text_brut,text_propre) :
      
     return "ok"
 
+
+def normalize_for_wer(text, lower=True, strip_punct=True,
+                       collapse_spaces=True, split_hyphen=False,
+                       strip_apostrophe=False):
+    if lower:
+        text = text.lower()
+
+    if split_hyphen:
+        text = text.replace("-", " ")
+
+    if strip_apostrophe:
+        text = text.replace("'", " ")
+
+    if strip_punct:
+        garder = ""
+        if not split_hyphen:
+            garder += "-"
+        if not strip_apostrophe:
+            garder += "'"
+        text = re.sub(rf"[^\w\s{re.escape(garder)}]", " ", text)
+
+    if collapse_spaces:
+        text = " ".join(text.split())
+
+    return text
+
+
 # ── Chargement ────────────────────────────────────────────
 def extract_segment(audio, sr, start, end):
     """Retourne l'array audio correspondant au segment [start, end] en secondes."""
