@@ -38,5 +38,43 @@
 
 **Exception possible avant cette échéance :** si des démos par des tiers externes (Banaan Food, ISRA) sont nécessaires avant le 9 août, un déploiement minimal et temporaire (type Render.com ou Railway.app, tier gratuit) pourrait se justifier ponctuellement, uniquement pour stabiliser une URL de démo — à évaluer au cas par cas, non planifié par défaut.
 
----
+## 21 juillet 2026 — Test retrieval RAG (J2) : mécanisme validé, résultats mitigés sur ce corpus
+
+**Contexte.** Premier test du RAG (S1-J2) : 6 fiches FR indexées dans ChromaDB (vaccination, santé animale,
+alimentation, reproduction, production laitière, conduite d'élevage), testées sur 5 questions d'éleveur
+réalistes, en comparant les trois modes de récupération (`semantic`, `bm25`, `hybrid`).
+
+**Résultats bruts (top-1 correct / 5 questions) :**
+- Semantic seul : 3/5 (Q1 vaccination, Q4 alimentation, Q5 reproduction)
+- BM25 seul : 0/5
+- Hybrid : 3/5 (identique à semantic seul)
+
+**Diagnostic.** BM25 échoue systématiquement sur ce corpus : les 6 fiches partagent un vocabulaire commun
+dense (vache, lait, jour, alimentation), ce qui produit du bruit lexical plutôt qu'un signal utile — BM25
+n'a aucune notion de sens, seulement de fréquence de mots. Le sémantique s'en sort mieux car il capture le
+sens au-delà des mots exacts. L'hybride n'apporte ici aucun gain par rapport au sémantique seul (hérite des
+mêmes erreurs, sans les corriger).
+
+**Échecs persistants même en sémantique pur (Q2 « fièvre », Q3 « traire »)** — probablement liés au contenu
+des fiches plutôt qu'à la méthode de récupération : `sante_animale.md` et `production_laitiere.md` ne
+mettent peut-être pas assez explicitement en avant les termes attendus (fièvre, traite) dans leurs premiers
+chunks.
+
+**Décision : basculer `retrieval: semantic` par défaut dans `config.yaml`** pour ce corpus restreint —
+l'hybride ne se justifie pas ici. Réévaluer l'hybride en S2 sur le corpus wolof, plus large et au vocabulaire
+technique potentiellement plus rare, contexte où BM25 pourrait mieux se justifier.
+
+**Ajustements de contenu à faire avant la prochaine évaluation :**
+- `sante_animale.md` : renforcer la présence explicite du mot « fièvre » dès le début de fiche (déjà présent
+  mais peut-être noyé dans le chunk)
+- `production_laitiere.md` : ajouter une mention explicite de la fréquence/rythme de traite (le mot
+  « traire »/« traite » n'apparaît qu'une fois, en fin de fiche, dilué dans un chunk plus général)
+- Plus largement : revoir le chunking pour que les mots-clés attendus par question type apparaissent tôt
+  dans chaque chunk, pas seulement quelque part dans le texte
+
+**Non bloquant pour la suite** — le mécanisme technique (indexation, requête, hybride, dédoublonnage) est
+validé et fonctionnel. Les ajustements ci-dessus sont une amélioration de contenu, à faire à la mise au
+propre plutôt que maintenant.
+
+------
 ---
