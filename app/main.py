@@ -1,7 +1,11 @@
+from dotenv import load_dotenv
+load_dotenv("config/.env")
+
 import yaml
 from pathlib import Path
 from fastapi import FastAPI, Request
 from app.channels.telegram import TelegramChannel
+from app.pipeline import process
 # from app.channels.whatsapp import WhatsAppChannel  # à activer en déploiement
 
 
@@ -19,14 +23,14 @@ telegram = TelegramChannel() if config["messaging"]["telegram"]["enabled"] else 
 
 
 async def process_message(message):
-    """
-    Logique métier commune, indépendante du canal.
-    TODO : brancher ffmpeg → transcribe.py → NLU → RAG → TTS (J3-J4).
-    Pour l'instant : accusé de réception simple.
-    """
+    """Logique métier commune, appelle le pipeline complet si un audio est présent."""
     if message.audio_path:
-        return f"Audio reçu : {message.audio_path}", None
-    return f"Texte reçu : {message.text}", None
+        resultat = process(message.audio_path, lang=config["lang"])
+        print(f"[pipeline] intent={resultat['intent']['intent']} "
+              f"latence_totale={resultat['latences']['total']}s")
+        return resultat["reponse_texte"], resultat["audio_out_path"]
+
+    return "Envoie-moi un message vocal pour que je puisse t'aider.", None
 
 
 @app.post("/telegram")

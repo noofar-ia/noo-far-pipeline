@@ -25,6 +25,7 @@ class TelegramChannel(MessagingChannel):
     async def _download_voice(self, file_id):
         # Étape 1 : obtenir le chemin du fichier
         resp = requests.get(f"{TELEGRAM_API}/getFile", params={"file_id": file_id})
+        print("DEBUG getFile response:", resp.status_code, resp.json())  # ligne ajoutée
         file_path = resp.json()["result"]["file_path"]
 
         # Étape 2 : télécharger le fichier réel
