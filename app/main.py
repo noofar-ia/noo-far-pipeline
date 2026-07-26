@@ -33,14 +33,20 @@ async def process_message(message):
     return "Envoie-moi un message vocal pour que je puisse t'aider.", None
 
 
+import asyncio
+
 @app.post("/telegram")
 async def telegram_webhook(request: Request):
     if not telegram:
         return {"error": "Telegram non activé dans config.yaml"}
 
     message = await telegram.parse_webhook(request)
-    response_text, response_audio = await process_message(message)
-    await telegram.send_message(message.from_id, text=response_text, audio_path=response_audio)
+
+    async def handle():
+        response_text, response_audio = await process_message(message)
+        await telegram.send_message(message.from_id, text=response_text, audio_path=response_audio)
+
+    asyncio.create_task(handle())
     return {"ok": True}
 
 

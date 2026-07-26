@@ -76,5 +76,37 @@ technique potentiellement plus rare, contexte où BM25 pourrait mieux se justifi
 validé et fonctionnel. Les ajustements ci-dessus sont une amélioration de contenu, à faire à la mise au
 propre plutôt que maintenant.
 
+## 26 juillet 2026 — Pipeline J4 : câblage validé, limite d'infrastructure Codespace identifiée
+
+**Contexte.** Assemblage du pipeline complet (ASR → NLU → RAG → LLM → TTS) exposé via FastAPI et connecté
+à Telegram. Bug Rasa/Windows confirmé structurel (voir entrée précédente) : développement basculé sur
+Codespace pour tout ce qui recharge un modèle Rasa.
+
+**Résultat obtenu.** Le pipeline a réussi, au moins une fois, à traverser la chaîne complète sur Codespace
+(4-core/16Go) : téléchargement audio Telegram → Whisper (ASR) → Rasa (NLU) → ChromaDB (retrieval) →
+Llama 3.2 3B (génération) → MMS-TTS (synthèse), avec un "Audio généré" confirmé en sortie. Le câblage entre
+toutes les briques développées J1-J3 est donc validé.
+
+**Limite identifiée : charge simultanée trop lourde pour le tier Codespace testé.** Rasa (TensorFlow) +
+Whisper + Llama 3.2 (6,4 Go) + MMS-TTS chargés ensemble dépassent régulièrement ce que Codespace peut
+soutenir de façon fiable, même à 16 Go de RAM (`available` pourtant confortable au moment des crashs,
+`Terminated`/`Killed` reproductibles autour de 50-80% du chargement de Llama 3.2 spécifiquement).
+Diagnostics écartés : espace disque (cache complet et sain, scan confirmé), corruption de fichiers,
+pic mémoire au chargement (`low_cpu_mem_usage=True` sans effet). Cause probable : limite de ressources
+Codespace non visible dans `free -h`/`df -h` (quota CPU, cgroup, ou politique de l'infrastructure cloud).
+
+**Bug secondaire corrigé au passage : retries Telegram.** Le webhook bloquait la réponse HTTP jusqu'à la
+fin complète du pipeline (plusieurs minutes) — Telegram, n'obtenant pas de réponse rapide, retentait
+l'envoi du même message, multipliant les exécutions concurrentes du pipeline et aggravant la pression sur
+les ressources. Corrigé via `asyncio.create_task()` : réponse immédiate à Telegram, traitement en tâche
+de fond.
+
+**Décision : le câblage du pipeline est considéré comme validé** malgré l'échec de robustesse sur cette
+infra précise. La vraie mesure de performance et de fiabilité se fera avec une infrastructure adaptée
+(Colab avec GPU, ou serveur de production dédié en phase MVP) — non prioritaire à corriger sur Codespace
+gratuit, qui n'a jamais eu vocation à faire tourner l'ensemble de la stack simultanément.
+
+---
+
 ------
 ---
