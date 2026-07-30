@@ -106,6 +106,41 @@ infra précise. La vraie mesure de performance et de fiabilité se fera avec une
 (Colab avec GPU, ou serveur de production dédié en phase MVP) — non prioritaire à corriger sur Codespace
 gratuit, qui n'a jamais eu vocation à faire tourner l'ensemble de la stack simultanément.
 
+## 28-29 juillet 2026 — Évaluation comparative NLLB vs Google Translate (fr→wolof), bascule méthodologique
+
+**Contexte.** Lors de la relecture des fiches wolof traduites via NLLB-200 (S2-J1), plusieurs erreurs
+significatives détectées, dont une sur un terme de base : « vache » traduit par « gàtt » (signifie
+« court » en wolof), au lieu de « nag ». Confirmé via dictionnaires wolof-français externes — vraie
+erreur du modèle, pas une lacune de connaissance personnelle. 8 occurrences trouvées sur 5 fiches sur 6.
+
+**Test comparatif effectué.** Le même segment (« Ma vache a de la fièvre, que faire ? ») testé sur :
+- **NLLB-200 distilled-600M** : erreur sur « vache » (gàtt, faux-sens)
+- **Google Translate (interface web `translate.google.com`)** : correct (« Sama nag dafa am yaram wu tàng »)
+
+**Limite découverte sur Google Translate** : l'**API officielle Cloud Translation ne supporte pas le
+wolof** (vérifié via `GET /language/translate/v2/languages`, `wolof_present: False`) — seule
+l'interface web grand public propose le wolof, probablement en mode communautaire/expérimental non
+exposé par l'API. Aucune automatisation par script n'est donc possible avec l'API officielle ; la
+traduction via Google doit se faire manuellement, un texte à la fois, dans l'interface web.
+
+**Décision : bascule vers traduction manuelle (Google Translate web + relecture systématique)** pour
+les 6 fiches et les questions de test de S2, remplaçant NLLB pour cette étape. Objectif : que le test
+critique du RAG wolof (S2-J2) évalue l'architecture de récupération, pas la qualité de traduction —
+les deux causes d'échec ne doivent pas rester mélangées dans un même résultat.
+
+**Évaluation comparative à formaliser en score, une fois la relecture terminée :**
+- Construire un petit jeu de phrases de référence (les 6 fiches + 10 questions, ou un sous-ensemble),
+  avec traduction validée par relecture humaine comme référence
+- Noter séparément NLLB et Google Translate sur ce même jeu, avec une méthode simple (ex. % de segments
+  jugés corrects sans retouche, ou nombre de corrections nécessaires par segment)
+- Consigner le score de chaque outil dans `docs/S2_limites_nllb_wolof.md`, à réutiliser pour le rapport
+  baseline (S4) et pour trancher si NLLB reste viable pour un futur passage à plus grande échelle
+  (15+ fiches, où la traduction manuelle via interface web deviendrait trop coûteuse en temps)
+
+**Non tranché à ce stade** : le score chiffré définitif — dépend de la relecture complète des 6 fiches,
+en cours. Cette entrée sera complétée une fois les données disponibles.
+
+---
 ---
 
 ------
