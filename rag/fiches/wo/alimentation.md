@@ -1,27 +1,27 @@
-# Jëfandikukat yi ñu sàmm ay njaam
+# Dundal nag yiy ratt
 
-## Réew yi ñu taxal ci bés bu nekk
+## Rasion yiñ digal ñu lekk bis bu nekk
 
-Ci biir bant wu am solo, niir yi ñu bëgg a lekk bés bu nekk mooy:
-- 6 kg ci xëtu ñaawtéef**
-- **3 kg yu ñu di xeex**
+Ngir nag bu màgget, ni ñu koy seentu bis bu nekk mooy::
+- **6 kg forage bu waw**
+- **3 kg de konsentrat**
 
-Ñi ñu ko sàkk di wàcc ci ndaje yi, ngir am lu baax.
+Dañu wara méngale bariwaayu baayima bi ak diisaayu baayima bi, tolluwaayu yaram wi (ëmb, nàmp), ak jumtukaay yiñ am ci gox bi.
 
-## Fuuf yu ñu am ci réew mi
+## forage bu am ci gox bi
 
-Am na ay alal yu ñu am ci réew mi ngir di tëral, rawatina ca weer gu séq:
-- **Niébé** (sariit 58-74 ak 66-35)  di jëfandikoo ñaari lu jëm ci jëmm bi (gànnaaw + fey), ñu bind ngir sàkku fey
-- *Bourgogne*
-- **Résidu àll bi**: ay xëtuy riis, féex yu ñu di jël ci cër.
+Barina xeeti ñax yuñ digal ñu yokk ci regime bi, rawatina ci jamonoy taw yi:
+- **Niébé** (sariit 58-74 ak 66-35) gàñcax gu am ñaari njeriñ (pepp + ñax), nangu nañu ko ngir defar ñax
+- *Bourgou*
+- **Résidu  mbay mi**: mburu céeb, mburu yu ndaw
 
-## Jëfandikukat yu natural yi
+## Dewormer naturel
 
-Ci faramam, ay xët yi ñu jëfandikoo ci biir kër gi di def lu ñuy wax neem dafa am solo bu leen tëj a gën a rafetal. Am na yeneen tànn yuy toppati jàngoro ya, sujjatu fa màndarga farmaawis gu néew doole lañuy fekk.
+Ci baykati famiy yu ndaw yi, dañuy faral di jëfandikoo xobi neem ngir ray gunóor—muy beneen pexe buy mottali pajum veterineer, rawatina ci barab yu bariwul ay produit farmasi.
 
-## Liy wàcc ci mbirum nit ñi
+## wàll bu am solo
 
-Jëf-jàngu (ñàññ bu néew walla yu bare) dafa am solo luy àgg ci wàllu njaboot yi ak jëfandikoo jaamuwaay bi  gis tabla gi  Jaamburug gàtt gu jënd ji  ngir xamee diggante ñakk, at ak njariñu.
+Regime bu tolloowul (ñakk forage wala concentré) dafay indi jafe-jafe ci liggéeyum meew mi ak ci njurug nit—xoolal fiche bi tuddu "Njurug nag yu am meew" ngir xam lëkkaloo gi am ci diggante diisaay bi, at yi, ak njurug baayima yi.
 
-- ci ...
+---
 *Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; étude ISRA sur les pratiques alimentaires ; AICCRA (validation niébé 58-74).*

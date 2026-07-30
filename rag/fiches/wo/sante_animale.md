@@ -1,26 +1,26 @@
-# Yëfandikukat yi  xamlu ay njàqare yu am solo ci àddina si
+# Wérgi-yaram baayima - xam jafe-jafe yu bari
 
-## Yalla yi mu am ci féew bi
+## Feebaru noyyig
 
-Pneumopathies (yëf-jàmm) di ci jàngoro yi gën a feeñ ca ndaw yu ñu ngi doon réer ci Senegaal. Ñu am na lu jëm ci cosaan yiy jëmeel (promiscuité, àddukaay bu baax ci biir njaam), ak garab gi (séngaar).
+Pneumopathies (feebaru noyyig) bokk nañu ci feebar yiy gëna jàpp baayima yu ndaw yi ci Senegal. Dañuy faral di lëkkaloo ak anam wi ñuy yar baayima yi (ñu bari ay doomi jàmbur, ventilation bu baaxul ci biir néeg bi) ak jamono ji (coppite yi ci klimaa bi).
 
-## Yëfandikukat yuy xët yi ci wàll gi:
+## Feebaru mbàq yiy bawoo ci parasit
 
-Dëmbi-demm yi (parasites intérieurs) mooy yeneen lu réy ci jàngoroy ndaw yu ñu di feebar. Fëpp bu ànd ak àddunaay bi, ngir tëj ay wormifug te xeex na seen jëfandikoo gi gën a am njariñ ca jamonoy ndawiir ya (gërem, màggat, doom).
+Strongylosis (parasit yi ci biir) mooy beneen sabab bu mag biy waral feebar ci baayima yu ndaw yi. Prograam bu boole deworming ak ñakk saa yu nekk dafay gëna baaxal xéewali zootechnique yu gétt gi (diisaay, màgg, njuram).
 
-## Fëppug féew yuy xeex (PPCB) ci bérab yi.
+## Pleuropneumonie nag buy joxe jàngoro (CBPP)
 
-Yalla yi ñu war a topplu ci Senegal  reemergence bi am nañu lu jëm.Yallug gi di génne ci biir ay xarit, te mën na jébbal ñàkk yu réy ca xarnu bu dul àccëf.Xawmañ mooy cosaan wu gën a mag ngir bañ koo wàccee.
+Feebaru nag bu war ñu diko saytu bu baax—amna ñu am feebar bu feeñaat ci Senegal. Dafay joxe feebar bi su baayima yi di laal seen biir, te mën na jur loraange yu bari ci géttu bu ñaquwul. Ñakk mooy xeetu fàggu bi gëna am solo.
 
-## Bi nga dem ci ndawi njiit yi
+## Kañ nga wara dem seeti veterineer
 
-Jëfandikukat bu am ay firnde yu mel ni mëndiku yi, war a jébbal ko ci lu mujj:
-- feebar walla xanaa ñàkk,
-- dugal walla xëtuy féew,
-- diarée bu tollu,
-- ñàkk kiloy lu mucc ci biir njariñ gu rafet.
+Baayima bu wane màndarga yii dañu ko wara saytu ci saa si:
+- yaram wu tàng wala nelaw bu amul fenn,
+- sëqët wala jafe-jafe noyyi,
+- biir buy daw budul jeex,
+- gaawa wàññi yaram doonte dangay topp regime bu jaar yoon.
 
-Buleen xeex ay yar yu am jàngoro walla feebar  ba tey ñu war a faj (tal Xët yi ci wàll gi:  Fëppal ak faragluwaay ).
+Bul musa ñaq baayima bu feebar wala bu am yaram wu tàng—xaaral mu wér (xoolal fiche bii di "Tàq ak Prophylaxie").
 
-- ci ...
+---
 *Sources : ISRA-IEMVT, Laboratoire national de l'élevage et de recherches vétérinaires ; ISRA, Fiches Techniques — Réémergence de la Péripneumonie Contagieuse Bovine (PPCB) au Sénégal.*

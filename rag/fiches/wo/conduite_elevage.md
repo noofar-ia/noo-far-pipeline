@@ -1,31 +1,31 @@
-# Jëfandikukat yi di jëfe ci njaboot ji
+# Doxal baayima yi
 
-## Fëll-fég yi ñu war a tànn
+## Tanneef raas yu méngoo
 
-Senegal gën a gëna màgg ci ay jëmm yu ñu am tëdd ak jàngoro yi, lu baax ju ko importé:
+Senegal dafay njëkka bàyyi xel ci raas yu mëna xeex bekkoor ak feebar yu bawoo ci dëkk bi, te gëna mëna ànd ak raas yiñ indi ci bitim réew.
 
-*Bowins*
-- N'Dama  resistant à trypanosomiase (dégg gi ñu xamal ci féew yi)
-- Gobra  ay njariñ yi di jël ci bérab bi
-- Azawak  jëmmukaay bi
+**Jur**
+- N'Dama - feebar buy xeex trypanosomiasis (feebaru mbonaat tsetse)
+- Gobra - raas bu am meew
+- Azawak - raas nag
 
-** Mbooloom ak bépp gàtt**
-- Gëru Peulh  lu am solo ci àdduna yi
-- Djallonké  rustik race
+**Xar ak bëy**
+- Peulh race - méngoo ak zone yu wow
+- Djallonké - raas bu dëgër
 
-## Ndóom ak njàmbaar yi ñu am ci njaam gi
+## Dëkkuwaay ak anam yi ñuy yar
 
-Yëfandikukat yu rafet yi di fexe ci wàllug jàngoroy (tal xët  Jënd bu mag) te gën a gëna am njariñ, ba tax ay xeetu dund gi baax.
+Dëkkuwaay bu baax dafay wàññi tasaaroo feebar bi (xoolal fiche "Wérgi-yaramu baayima yi") ba noppi gëna yombal baayima yi, suko defee ñu gëna mëna liggéey. Ventilation bu doy ak moytu ñu dajaloo nit ñi dina wàññi risku feebar yuy jàpp noyyig nit.
 
-## Jëfandikukat yi ci biir at wi
+## Yoriinu géttu at mi yépp
 
-Jëfandikukat yi war nañu a soppi ak jaarale bi:
-- **Jëf-jiggu: xeex na ñàkk ay sàmm yu bees, séddale ci àll (ñiiwug jëmm yi ñu di jël, sàmm yiy yàlla  gis fiil  Jën)
-- **Jëf-jaay: jëfandikoo lu bare ci tool yi, waaye di jaaxal jàngoroy paraasiit yu gën a feeñ ca jamono ji wet
+Li ñuy yar baayima yi dafa wara méngoo ak jamono yi:
+- **Jamonoy taw**: waajal ñàkkum ñax mu fere ak waajal ay reserve (residu mbay mi, ñax muñ denc—xoolal fiche "Lekk").
+- **Jamonoy taw**: jëfandikoo ñax mu am, waaye moytu feebar yiy bawoo ci parasit yi, ndax ñooy gëna bari ci jamonoy taw.
 
-## Àllukaay yu àndal ak moom
+## Jumtukaayi jàppale
 
-Am na ay tool yu digitale ngir toppat farmuñ yi ci Senegaal: appy sàmm ak tàkk-tallal, xaritug àddunaay bi ñu di gis ni dëkku. Xët gii mooy "serwis" (agenteen jëfekaayu gàtt, coopérati) ngir xam lu am ca wàllu réew mi.
+Jumtukaayi digital am nañu ngir jàppale baykati baayima yi ci Senegal, lu ci melni aplikaasioŋ yuy saytu wérgi-yaram ak jaay baayima yi, ak itam ay artu ci meteo ngir waajal bekkoor yi. Baykat yi dañu wara seeti sarwiisu ndimbal yi ci dëkk bi (agent yiy yokk baayima yi, koperatiif yi) ngir xam ban xéewal lañu am ci seen gox.
 
-- ci ...
+...
 *Sources : Ministère de l'Élevage du Sénégal ; ISRA (races locales et adaptation climatique) ; projets AICCRA et MASAE (outils numériques d'appui).*

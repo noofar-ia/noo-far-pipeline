@@ -1,27 +1,27 @@
-# Jëf-jërëmug njaam yi ñu sàmm
+# Yaram bu baayima yiy ratt meew
 
-## Xët wu ñu war a jël ci wàllu mbëj yi
+## Mébetu am doom
 
-Ci sàmm yi, njàngat bi dafa am na ci benn njaam bu nekk atum. ngir loolu mu defal, jabar gi war nañu a feebar lu tollu 3 weer gannaaw ñu jël ko.
+Ci wàllu yar giy ratt meew, li ngay bëgga mooy am **benn nag bu nekk ci at mi**. Ngir mëna def loolu, fàww ñu ëmb nag yi lu tollu ci ñetti weer ginaaw bi ñu juddoo.
 
-## Jëf-jëkkaay bu ñu di jël
+## Jamonoy njëkk yar
 
-Jëf yi di tàmbalee jël ci 24 ak 36 weer, te loolu dafa tax ñu am 15 walla 27 weer ngir tëj seen doom. Su ko defee su gàtt gi amee njëkk bu baax lu mat ñaari ñetti fan yu góor ya mu ëmb.
+Naag yu jigéen yi dañuy tàmbali génne meew suñu amee 24 ba 36 weer. Loolu mooy ñu wara yar baayima bi diggante 15 ba 27 weer, lépp bëgg baayima bi yegg ci diisaayu dundu bu tollu ci ñaar ci ñetti pàcci diisaayu mag ñi ci raas bi.
 
-## Xët yi lëkkalook wii "Séelection"
+## Xool ak tànneef
 
-Ci wàll bi, ci lu jëm ci xët yi gën a rafet yuy jëmm ay yaram di jëfandikoo àqëriñ gi:
-- ñëf yi ñu sàkk,
-- jëmm giy ay xarit, rawatina di yëkk yi.
+Ngir mëna tànnee bu baax baayima yiy yar, fàww ñu faral di saytu seen liggéey, lu ci melni:
+- volume yi ñuy defaree meew,
+- coppite ci diisaayu baayima, rawatina ci nag yu jigéen yi.
 
-## Xët yi ñu tànn ci garab gi
+## Tann raas bi
 
-Réew yi ñu am ci réew mi gën nañu soppi ak njariñ Senegaal:
-- N'Dama**  diine ci trypanosomiase, lu rafet ngir àll yi ñu doon fexe
-- *Gobra*  raas yi ñuy def ci gàtt.
-- **Azawak**  orientée pour la production de viande
+Raas yu dëkk bi ñoo gëna mëna ànd ak dundin Senegaal:
+- **N'Dama** — mën na xeex trypanosomiasis, mën na nekk ci barab yu tsetse yi bari
+- **Gobra** — raas bu am meew
+- **Azawak** — raas bu bëgg yàpp
 
-Fekk bu ñu tànn di jëmm bi, dafa am lu mujj ci jëfandikoo ay jëkki ak safaan wi ngir bañ a jàngoroy lokal yi.
+Tanneef raas bi dafay indi jafe-jafe ci wàllu ëmb ak bañaale feebar yi ci dëkk bi.
 
-- ci ...
+...
 *Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; ISRA — Programmes de sélection du bovin N'Dama en Afrique de l'Ouest (Cahiers Agricultures, 2020).*

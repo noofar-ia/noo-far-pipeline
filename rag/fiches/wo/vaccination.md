@@ -1,26 +1,26 @@
-# Waxtu yi ñuy def ak faral ci gàtt gi
+# Wérgi-yaram baayima - xam jafe-jafe yu bari
 
-## Yalla yi war a taxal ci wàllu jàngoroy yu gën a rafet
+## Feebaru noyyig
 
-Yéen ci Senegaal, ay jàngoro yuy xeex yi am solo diine la ñu doon àgg ca wàllu taxawute gi lu bare:
+Pneumopathies (feebaru noyyig) bokk nañu ci feebar yiy gëna jàpp baayima yu ndaw yi ci Senegal. Dañuy faral di lëkkaloo ak anam wi ñuy yar baayima yi (ñu bari ay doomi jàmbur, ventilation bu baaxul ci biir néeg bi) ak jamono ji (coppite yi ci klimaa bi).
 
-- **Pléuropnémiy yu jàngoro yi ci bant (BPP)**  bovinaan
-- **Dérmatozeum nooduleux infectious de la vache**  ci bérab yi
-- **Pesta yu ndaw yi di xeex**  xar ak cabbi
-- **Féèvre afteuse**  bœufs
-- ** Pasteurellose**  bël ak ndaw yuy réer
+## Feebaru mbàq yiy bawoo ci parasit
 
-## Ndàllub àddukaay bi
+Strongylosis (parasit yi ci biir) mooy beneen sabab bi gëna waral feebar ci baayima yu ndaw yi. Prograam bu boole deworming ak ñakk saa yu nekk dafay gëna baaxal xéewali zootechnique yu baayima yi (diisaay, màgg, njuram).
 
-Yéen ay xarit di leen war a sóobu ci pasteurellosis, dermatose du géej yi ñu koy daanu ak feebar bu baax bi nekk ca diiwaan gi.
+## Pleuropneumonie nag buy joxe jàngoro (CBPP)
 
-## Dégluwu defal ci wàll gi.
+Feebaru nag bu war ñu diko saytu bu baax—amna ñu am feebar bu feeñaat ci Senegal. Dafay joxe feebar bi su baayima yi di laal seen biir, te mën na jur loraange yu bari ci géttu bu ñaquwul. Ñakk mooy xeetu fàggu bi gëna am solo.
 
-Ci biir àllug xëtu, wàllu-wér gi di am lu bare ci ay jàngoroy gàtt yi. Fekk ca ndaw ya ñu doon jàppale ak yu néew doole (strongylose) mooy làkk gu mag bi  program bu àndal aalu ñaawte ak wormifugeen moo gën na jëfandikoo gumbaay ji lool.
+## Kañ nga wara dem seeti veterineer
 
-## Xët yi ñuy wax "Séngaay"
+Baayima bu wane màndarga yii dañu ko wara saytu ci saa si:
+- yaram wu tàng wala nelaw bu amul fenn,
+- sëqët wala jafe-jafe noyyi,
+- biir buy daw budul jeex,
+- gaawa wàññi yaram doonte dangay topp regime bu jaar yoon.
 
-Jëf bu feebar walla néew doole, duñu ko war a xeex  ba mu gënal di jële seen bopp ci kanam bi ñu koy jox.
+Bul musa ñaq baayima bu feebar wala bu am yaram wu tàng—xaaral mu wér (xoolal fiche bii di "Tàq ak Prophylaxie").
 
-- ci ...
+---
 *Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; ISRA-IEMVT, Laboratoire national de l'élevage et de recherches vétérinaires, Prophylaxie chez les petits ruminants au Sénégal.*

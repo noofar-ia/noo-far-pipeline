@@ -1,25 +1,25 @@
-# Jëfandikukat yi ñu sàmm
+# Defar meew
 
-## Liy jëmale ci sàkk diw yi
+## Mbir yiy indi jafe-jafe ci defar meew
 
-Amoonug làmmiñ bu bees di sàkk a ngi tekki ci ay jëfandikukat yu bare:
-- raas (raasi yi ñuy sàmm, ni Gobra di gën a màgg ci ràpp bi ñu koy lekk),
-- at ak lim yu ñu daan jënd,
-- njariñ ak wàllug ñam (tal xët  Jëfandikukat ),
-- xalewu yaram gi,
-- taxawu ñëm bi ak yoon wi ñu koy jëfandikoo.
+Bariwaayu meew mi nag mëna génne mingi aju ci mbir yu bari:
+- raas bi (raas yu am meew yu melni Gobra ñoo gëna bari raas yu am yàpp),
+- at yi ak limu laktaasioŋ yi njëkka am,
+- kalite ak dëppoo ci regime bi (xoolal fiche "Lekk"),
+- wérgi-yaramu baayima bi,
+- bariwaay bi ak saa yu ñuy ratt meew mi.
 
-## Xët yi lëkkalook wii
+## Xool liggéey bi
 
-Jëfandikukat yi ñu war a jëfe ci jamonoy jëfandikoo ngir mat lu dëgër, li bare ay màggati wàllu-wér gi nekk.
+Dañu wara faral di saytu liggéey bi baayima bu nekk di def ngir mëna natt meew mi ci baayima bu nekk. Xool-xool boobu dafay tax ñu mëna xàmmee liggéeykat yi gëna baax ngir tànnee baayima yi ñuy yar (xoolal fiche "Reproduction").
 
-## Royuug làmmiñ ci sàmm gi ñuy séddale
+## Lu meew mëna def ci yar gi cosaan
 
-Ci li ñu am, diw la di lu mag ci alal yi ak ay xaalis yu bari; du rekk mooy benn jëfandikukat bu ñuy sàmm. Ndoggante giy jëfekaay bi nekk ca réew mi ni N'Dama dafa booleal njariñug làmmiñu-dëmbu bii ngir topp xët wu tax na woon gàtt gu yàgg.
+Ngir baykati baayima yu bari, meew dafa am solo ci wàllu dundu, koom ak cosaan, te baña yam ci baykati baayima yi kese. Prograamu yar giñ jagleel raas yu dëkk bi, lu ci melni N'Dama, leegi dafay boole xeeti defar meew ci wetu màndarga yiñ baaxe defar yàpp nag.
 
-## Am na ci wàllu mbëj-bët yi.
+## Yokkateg wéy
 
-Am na ay coopérati yi ci Senegaal di jëfandikoo am yeneen tool yu mujj (lu ni robot ya ñuy sàkk, ñu seet ca Thiès) ngir gën a rafet ak wàllu-wàll gi.
+Yenn koperatiif yu Senegal yuy ratt meew ñu ngi jàngat jumtukaayi jamono (lu melni robot yuy ratt meew, ñu natt ko ci Thiès) ngir gëna baaxal ratt gi ak cet gi—muy mbir yu bees yuñ wara méngale ak moomeeli tool bu nekk.
 
-- ci ...
+...
 *Sources : ISRA — Programmes de sélection du bovin N'Dama en Afrique de l'Ouest (Cahiers Agricultures, 2020) ; Ministère de l'Élevage du Sénégal.*
