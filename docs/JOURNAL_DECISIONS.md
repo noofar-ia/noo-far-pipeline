@@ -140,6 +140,14 @@ les deux causes d'échec ne doivent pas rester mélangées dans un même résult
 **Non tranché à ce stade** : le score chiffré définitif — dépend de la relecture complète des 6 fiches,
 en cours. Cette entrée sera complétée une fois les données disponibles.
 
+## Bascule vers traduction manuelle (Google Translate web + relecture) — 28-29 juillet
+
+Suite aux erreurs répétées de NLLB sur du vocabulaire de base (voir points 1-4), et l'indisponibilité
+de l'API Cloud Translation pour le wolof, les fiches et questions de test ont été retraduites via
+l'interface web `translate.google.com`, avec relecture et correction manuelle systématique. Cette
+méthode remplace NLLB pour la suite de S2 — NLLB reste documenté comme option pour un futur test à
+plus grande échelle (15+ fiches), où la traduction manuelle deviendrait trop coûteuse en temps.
+
 ---
 ---
 
