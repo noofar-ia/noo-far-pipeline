@@ -8,7 +8,7 @@ QUESTIONS_TEST_WO = [
     {"question": "[Sama nag mënul am doom ?]", "intent_attendu": "reproduction"},
     {"question": "[Naka la dëkkuwaay nag yi wara nuru ?]", "intent_attendu": "conduite_elevage"},
 
-    {"question": "[Sama nag daa am biir buy daw—lan laa wara def?]", "intent_attendu": "sante_animale"},
+    {"question": "[Kañ laa wara dem seeti veterineer ?]", "intent_attendu": "sante_animale"},
     {"question": "[Lan mooy feebar bi gëna bari ci nag yi?]", "intent_attendu": "vaccination"},
     {"question": "[Ban at la nag mëna am doom?]", "intent_attendu": "reproduction"},
     {"question": "[Yan xeeti nag ñoo gën a méngoo ak klimaa bi ci Senegaal ?]", "intent_attendu": "conduite_elevage"},

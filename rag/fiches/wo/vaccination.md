@@ -1,4 +1,4 @@
-# Ñakk ak fàggu baayima yi
+# Ñaq ak fàggu baayima yi
 
 ## Feebaru noyyig
 
