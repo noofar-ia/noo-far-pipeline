@@ -1,0 +1,15 @@
+# rag/questions_test_wo.py — questions de test wolof, retraduites et vérifiées manuellement (S2)
+
+QUESTIONS_TEST_WO = [
+    {"question": "[Kañ laa wara ñaq samay nag?]", "intent_attendu": "vaccination"},
+    {"question": "[Sama nag dafa am yaram wu tàng; Luma wara def?]", "intent_attendu": "sante_animale"},
+    {"question": "[ Ñaata yoon laa wara ratt sama nag ci bis bi?]", "intent_attendu": "production_laitiere"},
+    {"question": "[ Ban regime moo méngoo ak nag buy nàmp?]", "intent_attendu": "alimentation"},
+    {"question": "[Sama nag mënul am doom ?]", "intent_attendu": "reproduction"},
+    {"question": "[Nan laa mëna denc sama gétt ci anam wu jaar yoon?]", "intent_attendu": "conduite_elevage"},
+
+    {"question": "[Sama nag daa am biir buy daw—lan laa wara def?]", "intent_attendu": "sante_animal"},
+    {"question": "[Lan mooy feebar bi gëna bari ci nag yi?]", "intent_attendu": "vaccination"},
+    {"question": "[Ban at la nag mëna am doom?]", "intent_attendu": "reproduction"},
+    {"question": "[Yan xeeti nag ñoo gën a méngoo ak klimaa bi ci Senegaal ?]", "conduite_elevage": "conduite_elevage"},
+]
