@@ -6,7 +6,7 @@ QUESTIONS_TEST_WO = [
     {"question": "[ Ñaata yoon laa wara ratt sama nag ci bis bi?]", "intent_attendu": "production_laitiere"},
     {"question": "[ Ban regime moo méngoo ak nag buy nàmp?]", "intent_attendu": "alimentation"},
     {"question": "[Sama nag mënul am doom ?]", "intent_attendu": "reproduction"},
-    {"question": "[Naka la dëkkuwaayu nag yi wara nuru ?]", "intent_attendu": "conduite_elevage"},
+    {"question": "[Naka la dëkkuwaay nag yi wara nuru ?]", "intent_attendu": "conduite_elevage"},
 
     {"question": "[Sama nag daa am biir buy daw—lan laa wara def?]", "intent_attendu": "sante_animale"},
     {"question": "[Lan mooy feebar bi gëna bari ci nag yi?]", "intent_attendu": "vaccination"},
