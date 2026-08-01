@@ -1,4 +1,4 @@
-# Wérgi-yaram baayima - xam jafe-jafe yu bari
+# Ñakk ak fàggu baayima yi
 
 ## Feebaru noyyig
 
