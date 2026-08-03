@@ -148,6 +148,32 @@ l'interface web `translate.google.com`, avec relecture et correction manuelle sy
 méthode remplace NLLB pour la suite de S2 — NLLB reste documenté comme option pour un futur test à
 plus grande échelle (15+ fiches), où la traduction manuelle deviendrait trop coûteuse en temps.
 
+## Décision RAG wolof (S2-J2, 29 juillet)
+
+**Résultats mesurés (fiches et questions retraduites manuellement, Google Translate + relecture) :**
+- Mode semantic : 70% (7/10)
+- Mode hybrid : 90% (9/10)
+
+**Décision retenue : hybrid pour le wolof** — contraire à la décision française (semantic
+retenu en S1-J2, où hybrid n'apportait aucun gain). L'architecture RAG devient donc
+**différenciée par langue** :
+- `fr` → semantic
+- `wo` → hybrid
+
+**Interprétation** : hypothèse retenue — le texte wolof traduit (même relu et corrigé) garde une
+syntaxe parfois calquée du français, ce qui dessert la similarité sémantique pure ; BM25
+(correspondance lexicale exacte) compense ce défaut mieux qu'en français, où le corpus est
+rédigé nativement et où BM25 n'apportait que du bruit lexical entre fiches proches.
+
+**Seul échec restant (hybrid)** : « Quel régime correspond à une vache en lactation ? »
+(alimentation).
+
+**Comparaison FR/wolof** : wolof 90% (hybrid) vs français 60% (semantic) — le wolof, avec le
+bon mode retenu, surpasse le résultat français.
+
+**Action de code nécessaire** : mettre à jour `config.yaml` pour un mode de retrieval
+différencié par langue (`rag.retrieval.fr` / `rag.retrieval.wo`), et ajuster `retriever.py`
+en conséquence si sa structure actuelle ne le permet pas encore.
 ---
 ---
 
