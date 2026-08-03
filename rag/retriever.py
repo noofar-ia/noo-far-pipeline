@@ -67,8 +67,14 @@ class HybridRetriever:
         return combined[:k]
 
 
-def retrieve(question, lang= None, mode="hybrid"):
+def retrieve(question, lang=None, mode=None):
     """Point d'entrée simple pour le reste du pipeline."""
+    config = load_config()
+    lang = lang or config["lang"]
+
+    if mode is None:
+        mode = config["rag"]["retrieval"].get(lang, "semantic")
+
     retriever = HybridRetriever(lang=lang)
     if mode == "hybrid":
         return retriever.retrieve_hybrid(question)

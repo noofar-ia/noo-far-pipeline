@@ -27,7 +27,9 @@ models:
 
 rag:
   fiches_dir: rag/fiches      # /fr, /wo ou /ff ajouté selon lang
-  retrieval: hybrid           # semantic | hybrid (BM25 + embeddings)
+  retrieval:
+    fr: semantic               # decision S1-J2 : hybrid n'apportait aucun gain sur corpus FR
+    wo: hybrid                 # decision S2-J2 : hybrid nettement superieur sur corpus WO traduit
   top_k: 3
   embedding_model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 
