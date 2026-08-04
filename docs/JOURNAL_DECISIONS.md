@@ -175,7 +175,21 @@ bon mode retenu, surpasse le résultat français.
 différencié par langue (`rag.retrieval.fr` / `rag.retrieval.wo`), et ajuster `retriever.py`
 en conséquence si sa structure actuelle ne le permet pas encore.
 ---
----
+## Licences des modèles ASR wolof retenus (à date du 29 juillet)
+
+**Whosper-large** : Apache 2.0 — usage commercial libre, modification et distribution sans
+restriction de publication de code source. Cohérent avec la stratégie du projet.
+
+**Wolof-HuBERT-CTC** : AGPL-3.0 — licence copyleft forte. Utilisée dans un service accessible
+par réseau (cas de Ñoo Far), elle impose en principe la publication du code source complet du
+service qui l'utilise, pas seulement du modèle. **Point de vigilance légal** à trancher avant
+tout déploiement en production avec ce modèle — à valider avec un conseil juridique si Wolof-
+HuBERT est envisagé au-delà de la phase de test/recherche actuelle.
+
+**Implication pour l'arbitrage final** : ce facteur légal renforce l'intérêt de Whosper-large
+comme candidat principal, indépendamment de son avantage déjà mesuré en performance (WER). Si
+Wolof-HuBERT reste envisagé comme alternative de secours, la question de la licence AGPL-3.0
+devra être explicitement tranchée (usage interne/recherche vs déploiement public).
 
 ------
 ---
