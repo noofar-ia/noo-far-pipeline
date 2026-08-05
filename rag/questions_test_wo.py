@@ -3,8 +3,8 @@
 QUESTIONS_TEST_WO = [
     {"question": "[Kañ laa wara ñaq samay nag?]", "intent_attendu": "vaccination"},
     {"question": "[Sama nag dafa am yaram wu tàng; Luma wara def?]", "intent_attendu": "sante_animale"},
-    {"question": "[ Ñaata yoon laa wara ratt sama nag ci bis bi?]", "intent_attendu": "production_laitiere"},
-    {"question": "[ Ban regime moo méngoo ak nag buy nàmp?]", "intent_attendu": "alimentation"},
+    {"question": "[Ñaata yoon laa wara ratt sama nag ci bis bi?]", "intent_attendu": "production_laitiere"},
+    {"question": "[Ban regime moo méngoo ak nag buy nàmp?]", "intent_attendu": "alimentation"},
     {"question": "[Sama nag mënul am doom ?]", "intent_attendu": "reproduction"},
     {"question": "[Naka la dëkkuwaay nag yi wara nuru ?]", "intent_attendu": "conduite_elevage"},
 
