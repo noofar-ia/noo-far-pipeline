@@ -1,0 +1,68 @@
+{
+  "lexique_domaine": {
+    "source": "rag/questions_test_wo.py",
+    "license": null,
+    "phrases": [
+      "Kañ laa wara ñaq samay nag",
+      "Sama nag dafa am yaram wu tàng; Luma wara def",
+      "Ñaata yoon laa wara ratt sama nag ci bis bi",
+      "Ban regime moo méngoo ak nag buy nàmp",
+      "Sama nag mënul am doom",
+      "Naka la dëkkuwaay nag yi wara nuru",
+      "Kañ laa wara dem seeti veterineer",
+      "Lan mooy feebar bi gëna bari ci nag yi",
+      "Ban at la nag mëna am doom",
+      "Yan xeeti nag ñoo gën a méngoo ak klimaa bi ci Senegaal"
+    ]
+  },
+  "phrases_kallaama": {
+    "source": "KALLAAMA SLR151",
+    "license": "CC-BY-4.0",
+    "phrases": [
+      "duñ ko traiter par n' importe quel appareil ndax produits yooyu kenn du ko mélangé ak ndox",
+      "donc  bu bu bu dinañ yomb a gis quoi dinañ yomb a gis bu fekkente ni yow am nga",
+      "nga dem fay ay nit pour ñu bayal la sa tool bu dee da nga yor tool bu mag",
+      " léegi juróom-ñaar fuk yooyu sax yépp du ñëw am na yeneen yu leen di yeneen  gaz yu leen di",
+      "am na ñoo xam ne sax gis naa leen ñu ngi may ñu ngi ji ci mois de juillet mais booy xool nawet"
+    ]
+  },
+  "phrases_nombres": {
+    "source": "KALLAAMA SLR151",
+    "license": "CC-BY-4.0",
+    "phrases": [
+      "le 26 juin la tawoon",
+      "nee naa la woon 63% yépp ay jigéen lañu",
+      "ndax 11 yi  11 yooyu yépp 6 yi ay jigéen la",
+      "15 jours sax boobu dafay daal di commencé génn",
+      "ñaare bu prix marché bi nekkee 300 en général Fapal 350 lay lay jëndee",
+      "man bu ma amoon  ñaari tool am cent kilos phosphates",
+      "muy  ñenti téeméeri kilos phosphates maanaam quatre cent kilos à l' hectare",
+      "ba yeneen fukki fan ak juróom ba mu mat  ñent fukki fan ak juróom"
+    ]
+  },
+  "phrases_codeswitch": {
+    "source": "KALLAAMA SLR151",
+    "license": "CC-BY-4.0",
+    "phrases": [
+      "dañuy jot informations yi régulièrement",
+      "ba léegi ñun ay  lii rek lan bëgg démultiplier l' information",
+      "donc loolu dafa am solo donc ci formation bi la ñuy miser d' abord",
+      "ndax tay ñu ngi war a waxtaanee processus de formation ak importance su Fra ak code barre",
+      "nekkul ne da ngay am nii après nga bàyyi mën nañu la wax benn information léegi",
+      "maanaam dugub gerte ak  ñebe boo ko xaymaa noonu rekk dina nekk juróom-ñetti hectare",
+      "    formations yi ñëw mu complété li des ci nawet bi semence yi ñi war a jot jot nañu",
+      "mais xamuñu fu mu jaaree cent kilomètres par par nuit"
+    ]
+  },
+  "wolof_ecrit": {
+    "source": "KALLAAMA SLR151 (wolof.txt)",
+    "license": "CC-BY-4.0",
+    "phrases": [
+      "fi mu nekk nii nag, tubaab yaa ngi puus nguurug Senegaal ngir mu xaatimal leen pas gi nu tudd ci kow.",
+      "Sunu sukkandikoo ci Jomaay Fay, li waral jafe-jafey jot ci ndox mi ñuy jànkoonteel mooy pólótigu moomale bu baaxul.",
+      "moom dey naataange la woon ñeel ñu ndóol ñi ko daa dikkal juge fu nekk ngir xontu",
+      "Bu weeso laaj yooyu amul tontu, ñu amal laaj ndax yoonu Senegaal moom na boppam.",
+      "loolee leen taxoon di fàttali nguur ak yoon fi mu war a yem, te bañ a rax pólitig ci mbir mi."
+    ]
+  }
+}
