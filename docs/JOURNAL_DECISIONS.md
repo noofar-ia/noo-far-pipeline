@@ -191,5 +191,69 @@ comme candidat principal, indépendamment de son avantage déjà mesuré en perf
 Wolof-HuBERT reste envisagé comme alternative de secours, la question de la licence AGPL-3.0
 devra être explicitement tranchée (usage interne/recherche vs déploiement public).
 
+## S2-J4 — Choix du modèle TTS wolof
+
+**Date** : [à compléter] · **Statut** : provisoire, réexaminé après J6
+
+### Contexte
+
+Le programme baseline prévoyait `facebook/mms-tts-wol`. Hypothèse invalidée : MMS-TTS ne
+couvre pas le wolof (dépôt inexistant, langue absente des 1107 codes officiels). Exploration
+comparative de substitution.
+
+Trois modèles synthétisés sur un corpus de test figé (36 phrases, 5 catégories, même input
+pour tous), puis notés en MOS simplifié — auto-évaluation, évaluateur unique, limite assumée.
+
+### Résultats
+
+| Modèle | Licence | Qualité mesurée |
+|---|---|---|
+| `soynade-research/Oolel-Voices` | AGPL-3.0 | **1er** |
+| `AIHubSN/Kiriku-Wolof-TTS` | Apache 2.0 | 2e |
+| `bilalfaye/speecht5_tts-wolof-v0.2` | MIT | éliminé — son parasité |
+
+SpeechT5 n'a pas été noté intégralement : la voix, robotique et avec écho, le disqualifie
+avant la grille. Trois variantes de speaker embedding testées sans amélioration — le défaut
+est le modèle, pas l'embedding. Une licence permissive ne sauve pas un modèle inutilisable.
+
+### Décisions arrêtées
+
+**1. Kiriku en socle pour S2-J5/J6**, malgré la meilleure note d'Oolel. Motif : la latence.
+VITS mono-locuteur contre 0,5 B avec clonage, dans une chaîne où Whisper large et le LLM
+s'additionnent déjà, pour un usage où l'éleveur attend au téléphone. Kiriku est retenu comme
+socle **le plus rapide** — c'est le seul argument qui le porte.
+
+**2. Oolel gardé en sonde ponctuelle**, substitué par l'adaptateur TTS (contrat
+`(audio, sr)` identique) une fois la chaîne instrumentée en J6.
+
+**3. L'AGPL n'est pas un critère d'exclusion.** Le copyleft fort est le mécanisme de
+réciprocité cohérent avec la gouvernance Ostrom du projet, et le pipeline a vocation à être
+ouvert. La licence d'Oolel ne pèse pas contre lui.
+
+**4. Le levier d'amélioration TTS est le frontend texte, pas le fine-tuning de domaine.**
+Un TTS mappe des graphèmes à des sons, il n'apprend pas l'élevage. Verbalisation des nombres,
+table de prononciation, gestion des emprunts : dans le code appelant, agnostique au modèle.
+Le second levier est la voix — clonage vocal chez Oolel, fine-tuning chez Kiriku.
+
+**5. Ordre du fine-tuning : ASR d'abord.** Maillon faible mesuré, et son erreur se propage à
+toute la chaîne, là où une imperfection TTS reste cosmétique. Gain attendu sur le lexique
+zootechnique *et* les conditions acoustiques de terrain (contre le studio radio de KALLAAMA).
+
+**6. `.lower()` = règle de production si Kiriku est confirmé.** Son vocabulaire ne contient
+aucune majuscule : elles sont supprimées silencieusement, sans erreur levée, mutilant les noms
+propres que contiendront les réponses RAG. À placer dans l'adaptateur TTS, pas chez l'appelant.
+
+### Réexamen prévu
+
+La sonde Oolel de J6 porte l'arbitrage entier. Si l'écart de latence bout en bout est
+acceptable, **Oolel redevient le choix par défaut** : meilleure qualité mesurée, clonage vocal,
+licence conforme à la gouvernance.
+
+### Points en suspens
+
+- Écart MOS chiffré entre Oolel et Kiriku, par catégorie
+- Base d'Oolel-Voices non publiée ; forte présomption de Chatterbox (Resemble AI, MIT) au vu
+  du code (`t3_cfg.safetensors`, `S3GEN_SR`/`S3_SR`, `exaggeration`/`cfg_weight`, `s3tokenizer`)
+- xTTS-v2-wolof (galsenai) non testé — reporté, et non déployable (licence non commerciale)
 ------
 ---
