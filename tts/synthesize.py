@@ -1,15 +1,17 @@
 """
-tts/synthesize.py — Synthèse vocale via MMS-TTS.
+tts/synthesize.py — Synthèse vocale, routée par famille de modèle.
+
+- MMS-TTS (facebook/mms-tts-*) : VitsModel de transformers.
+- Kiriku (AIHubSN/Kiriku-Wolof-TTS) : VITS Coqui, via coqui-tts + Synthesizer.
+Contrat de sortie identique pour les deux : (audio: np.ndarray, sr: int).
 """
 
 import yaml
 from pathlib import Path
-from transformers import VitsModel, AutoTokenizer
 import torch
+import numpy as np
 import soundfile as sf
 import sys
-import os
-
 
 _models_cache = {}
 
@@ -20,17 +22,65 @@ def load_config():
         return yaml.safe_load(f)
 
 
+# ── Backend MMS-TTS (transformers) ───────────────────────────────
+def _load_mms(model_name):
+    from transformers import VitsModel, AutoTokenizer
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"Chargement TTS MMS : {model_name} sur {device}...")
+    model = VitsModel.from_pretrained(model_name).to(device)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    return ("mms", model, tokenizer, device)
+
+
+def _synth_mms(entry, texte):
+    _, model, tokenizer, device = entry
+    inputs = tokenizer(texte, return_tensors="pt")
+    inputs = {k: v.to(device) for k, v in inputs.items()}
+    with torch.no_grad():
+        output = model(**inputs).waveform
+    audio = output.cpu().numpy().squeeze()
+    return audio, model.config.sampling_rate
+
+
+# ── Backend Kiriku (coqui-tts) ───────────────────────────────────
+def _load_kiriku(model_name):
+    # Shim : isin_mps_friendly retiré en transformers v5, importé par coqui-tts (chemin xTTS).
+    import transformers.pytorch_utils as pu
+    if not hasattr(pu, "isin_mps_friendly"):
+        pu.isin_mps_friendly = lambda elements, test_elements: torch.isin(elements, test_elements)
+
+    from huggingface_hub import snapshot_download
+    from TTS.utils.synthesizer import Synthesizer
+
+    ckpt = snapshot_download(repo_id=model_name)
+    use_cuda = torch.cuda.is_available()
+    print(f"Chargement TTS Kiriku : {model_name} sur {'cuda' if use_cuda else 'cpu'}...")
+    synth = Synthesizer(
+        tts_checkpoint=str(Path(ckpt) / "model.pth"),
+        tts_config_path=str(Path(ckpt) / "config.json"),
+        use_cuda=use_cuda,
+    )
+    return ("kiriku", synth)
+
+
+def _synth_kiriku(entry, texte):
+    _, synth = entry
+    # .lower() est déjà appliqué par tts/frontend.py en amont ; ne pas le refaire ici.
+    wav = synth.tts(texte)
+    audio = np.asarray(wav, dtype=np.float32)
+    return audio, synth.output_sample_rate
+
+
+# ── Routage ──────────────────────────────────────────────────────
 def get_tts_model(lang=None):
     config = load_config()
     lang = lang or config["lang"]
     if lang not in _models_cache:
         model_name = config["models"]["tts"][lang]
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-
-        print(f"Chargement du modèle TTS ({lang}) : {model_name} sur {device}...")
-        model = VitsModel.from_pretrained(model_name).to(device)
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        _models_cache[lang] = (model, tokenizer, device)
+        if "kiriku" in model_name.lower():
+            _models_cache[lang] = _load_kiriku(model_name)
+        else:
+            _models_cache[lang] = _load_mms(model_name)
     return _models_cache[lang]
 
 
@@ -38,23 +88,16 @@ def synthesize(texte, lang=None, output_path=None):
     """
     Synthétise un texte en audio.
 
-    Args:
-        texte (str) : le texte à synthétiser
-        lang (str) : code langue, doit exister dans config.yaml (models.tts.<lang>)
-        output_path (str | Path, optionnel) : si fourni, sauvegarde le WAV à ce chemin
-
     Returns:
-        tuple (array numpy, sample_rate)
+        tuple (array numpy float32, sample_rate int)
     """
-    model, tokenizer, device = get_tts_model(lang)
-    inputs = tokenizer(texte, return_tensors="pt")
-    inputs = {k: v.to(device) for k, v in inputs.items()}
+    entry = get_tts_model(lang)
+    backend = entry[0]
 
-    with torch.no_grad():
-        output = model(**inputs).waveform
-
-    audio = output.cpu().numpy().squeeze()
-    sr = model.config.sampling_rate
+    if backend == "kiriku":
+        audio, sr = _synth_kiriku(entry, texte)
+    else:
+        audio, sr = _synth_mms(entry, texte)
 
     if output_path:
         sf.write(str(output_path), audio, sr)

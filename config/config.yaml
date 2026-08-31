@@ -3,33 +3,27 @@
 #  Paramètres NON-secrets uniquement. Les tokens vont dans .env
 # ═══════════════════════════════════════════════════════════
 
-lang: fr                    # fr | wo | ff ← commutateur de langue
+lang: wo                   # fr | wo | ff ← commutateur de langue
 enhance_mode: denoise       # none | denoise | enhance
 
 models:
   asr:
     fr: openai/whisper-medium
-    wo: noofar-ia/whisper-wolof
+    wo: CAYTU/whosper-large     # placeholder noofar-ia/whisper-wolof à venir (fine-tune)
     ff: noofar-ia/whisper-pulaar
   tts:
     fr: facebook/mms-tts-fra
-    wo: noofar-ia/mms-tts-wolof
+    wo: AIHubSN/Kiriku-Wolof-TTS            # MMS ne couvre pas le wolof (S2-J4) ; Kiriku en socle
     ff: facebook/mms-tts-ful
-
-  # Traduction NLLB-200 (fr → wo/ff) — préparation des fiches.
-  # Hors chemin critique du prototype français ; utile dès la bascule wolof.
-  translation:
-    model: facebook/nllb-200-distilled-600M
-    src_lang: fra_Latn
-    tgt_lang:
-      wo: wol_Latn
-      ff: fuv_Latn
+  llm:
+    fr: meta-llama/Llama-3.2-3B-Instruct
+    wo: meta-llama/Llama-3.2-3B-Instruct    # ou soynade-research/Oolel-v0.1
 
 rag:
   fiches_dir: rag/fiches      # /fr, /wo ou /ff ajouté selon lang
   retrieval:
     fr: semantic               # decision S1-J2 : hybrid n'apportait aucun gain sur corpus FR
-    wo: hybrid                 # decision S2-J2 : hybrid nettement superieur sur corpus WO traduit
+    wo: hybrid                 # decision S2-J2 : hybrid nettement supérieur sur fiches WO natives
   top_k: 3
   embedding_model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 
@@ -41,5 +35,6 @@ messaging:
     enabled: false             # réservé au déploiement (phase MVP)
     provider: twilio           # twilio | meta
 
-services:
+nlu:
+  enabled: false               # intent calculé mais non utilisé + modèle Rasa entraîné en FR
   rasa_url: http://localhost:5005    # service NLU (environnement séparé)
