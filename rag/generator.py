@@ -76,8 +76,12 @@ Tontu :""",
 }
 
 
+LABEL_EXTRAIT = {"fr": "Extrait", "wo": "Pàcc"}
+
+
 def build_prompt(question, passages, lang="fr"):
-    contexte = "\n\n".join(f"[Extrait {i+1}] {doc}" for i, (doc, meta) in enumerate(passages))
+    label = LABEL_EXTRAIT.get(lang, "Extrait")
+    contexte = "\n\n".join(f"[{label} {i+1}] {doc}" for i, (doc, meta) in enumerate(passages))
     gabarit = PROMPTS.get(lang, PROMPTS["fr"])
     return gabarit.format(contexte=contexte, question=question)
 

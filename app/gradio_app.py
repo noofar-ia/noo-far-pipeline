@@ -6,7 +6,9 @@ import gradio as gr
 from pathlib import Path
 import tempfile
 
-from app.pipeline import process
+from app.pipeline import process, load_config
+
+config = load_config()
 
 
 def traiter_audio(audio_path):
@@ -14,9 +16,12 @@ def traiter_audio(audio_path):
     if audio_path is None:
         return "Aucun audio fourni.", None, "", ""
 
-    resultat = process(audio_path, lang="fr")
+    resultat = process(audio_path, lang=config["lang"])
 
-    intent_str = f"{resultat['intent']['intent']} (confiance: {resultat['intent']['confidence']:.2f})"
+    if resultat["intent"]:
+        intent_str = f"{resultat['intent']['intent']} (confiance: {resultat['intent']['confidence']:.2f})"
+    else:
+        intent_str = "NLU désactivé"
     latences_str = " | ".join(f"{k}: {v}s" for k, v in resultat["latences"].items())
 
     return (

@@ -26,7 +26,8 @@ async def process_message(message):
     """Logique métier commune, appelle le pipeline complet si un audio est présent."""
     if message.audio_path:
         resultat = process(message.audio_path, lang=config["lang"])
-        print(f"[pipeline] intent={resultat['intent']['intent']} "
+        intent_str = resultat["intent"]["intent"] if resultat["intent"] else "désactivé"
+        print(f"[pipeline] intent={intent_str} "
               f"latence_totale={resultat['latences']['total']}s")
         return resultat["reponse_texte"], resultat["audio_out_path"]
 
