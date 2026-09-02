@@ -212,3 +212,31 @@ baseline.**
 **Non traité aujourd'hui, reporté :** chantier retrieval (`rag/indexer.py`, biais
 de ranking + fiche vide) ; retest Oolel avec correctifs ; mesure latence 4-bit/T4
 unique (déploiement cible, distincte du plafond qualité mesuré aujourd'hui).
+
+## Réflexion pour la suite (MVP) — réentraîner le NLU pourrait remplacer une partie du retrieval
+
+**Contexte.** NLU désactivé depuis S2 (`nlu.enabled: false`, modèle Rasa entraîné
+en français, inutilisable sur du wolof). Question posée en repensant à
+l'architecture globale, à la lumière du diagnostic retrieval du jour.
+
+**Piste.** Avec le corpus actuel (6 fiches = 6 intentions, correspondance
+1-pour-1), un NLU wolof correctement entraîné rendrait le retrieval sémantique
+largement inutile pour le *routage* : l'effet « hub » identifié aujourd'hui
+(modèle d'embedding généraliste mal adapté au wolof) devient sans objet si
+l'intention de la question est déjà connue en amont — plus besoin de similarité
+vectorielle pour choisir la fiche.
+
+**Réserves posées avant d'en faire un plan :**
+1. Nécessite un corpus wolof annoté question→intention construit spécifiquement.
+   Les 10 questions de `rag/questions_test_wo.py` sont un point de départ, très
+   insuffisantes pour entraîner (moins de 2 exemples/intention sur 6 classes).
+2. Ne fonctionne proprement que tant qu'1 fiche = 1 domaine ; dès que le corpus
+   grandit (plusieurs fiches par domaine), retombe sur le même besoin de bon
+   retrieval à l'intérieur du « tiroir » trouvé par le NLU — repousse le
+   problème plus qu'il ne l'élimine définitivement.
+3. Doit intégrer **dès la conception** une classe de rejet explicite
+   (« hors_corpus ») — sinon reproduit, une étape plus tôt dans la chaîne, le
+   même problème de garde-fou identifié aujourd'hui avec Oolel sur la question
+   prix/lait.
+
+**Statut : piste MVP à instruire, non planifiée dans le sprint S3 en cours.**
