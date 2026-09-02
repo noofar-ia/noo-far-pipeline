@@ -4,9 +4,19 @@ rag/retriever.py — Récupération hybride BM25 + embeddings.
 
 import yaml
 from pathlib import Path
+import numpy as np
 import chromadb
 from chromadb.utils import embedding_functions
 from rank_bm25 import BM25Okapi
+
+
+def _minmax(scores):
+    """Normalise un vecteur de scores dans [0, 1] pour rendre sémantique et BM25 comparables."""
+    scores = np.asarray(scores, dtype=float)
+    lo, hi = scores.min(), scores.max()
+    if hi - lo < 1e-9:
+        return np.zeros_like(scores)
+    return (scores - lo) / (hi - lo)
 
 
 def load_config():
@@ -21,19 +31,24 @@ class HybridRetriever:
         lang = lang or config["lang"]  # utilise la langue active de config.yaml par défaut
         self.top_k = config["rag"].get("top_k", 3)
         embedding_model = config["rag"]["embedding_model"]
+        hybrid_weights = config["rag"].get("hybrid_weights", {"semantic": 0.5, "bm25": 0.5})
+        self.w_semantic = hybrid_weights["semantic"]
+        self.w_bm25 = hybrid_weights["bm25"]
 
         client = chromadb.PersistentClient(path=str(Path(__file__).parent / "chroma"))
-        embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name=embedding_model)
+        self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name=embedding_model)
         self.collection = client.get_collection(
             name=collection_name or f"fiches_{lang}",
-            embedding_function=embedding_fn
+            embedding_function=self.embedding_fn
          )
 
-        # Récupérer tous les documents pour construire l'index BM25
-        all_docs = self.collection.get()
+        # Récupérer tous les documents (+ embeddings) pour construire l'index BM25 et la fusion pondérée
+        all_docs = self.collection.get(include=["documents", "metadatas", "embeddings"])
         self.documents = all_docs["documents"]
         self.metadatas = all_docs["metadatas"]
         self.ids = all_docs["ids"]
+        doc_embeddings = np.array(all_docs["embeddings"])
+        self.doc_embeddings_norm = doc_embeddings / np.linalg.norm(doc_embeddings, axis=1, keepdims=True)
         tokenized = [doc.lower().split() for doc in self.documents]
         self.bm25 = BM25Okapi(tokenized)
 
@@ -50,21 +65,24 @@ class HybridRetriever:
         return [(self.documents[i], self.metadatas[i]) for i in top_indices]
 
     def retrieve_hybrid(self, question, k=None):
-        """Fusionne sémantique + BM25, dédoublonne, garde les k meilleurs."""
-        k = k or self.top_k
-        semantic = self.retrieve_semantic(question, k=k)
-        bm25 = self.retrieve_bm25(question, k=k)
+        """Fusionne sémantique + BM25 par somme pondérée de scores normalisés (min-max par requête).
 
-        seen = set()
-        combined = []
-        # Alterner pour donner une chance égale aux deux méthodes
-        for sem, lex in zip(semantic, bm25):
-            for doc, meta in (sem, lex):
-                key = meta["source"] + str(meta["chunk_index"])
-                if key not in seen:
-                    seen.add(key)
-                    combined.append((doc, meta))
-        return combined[:k]
+        Poids par défaut 0.2/0.8 (config rag.hybrid_weights) : le modèle d'embedding actuel
+        n'est pas entraîné sur le wolof et produit un effet "hub" (un document scorant haut
+        pour presque toutes les requêtes, cf. diagnostic S2-J3) — sous-pondérer le sémantique
+        neutralise ce biais sans perdre l'apport ponctuel du signal sémantique.
+        """
+        k = k or self.top_k
+        q_embedding = np.array(self.embedding_fn([question])[0])
+        q_embedding_norm = q_embedding / np.linalg.norm(q_embedding)
+        sem_scores = self.doc_embeddings_norm @ q_embedding_norm
+
+        tokenized_q = question.lower().split()
+        bm25_scores = np.asarray(self.bm25.get_scores(tokenized_q))
+
+        combined = self.w_semantic * _minmax(sem_scores) + self.w_bm25 * _minmax(bm25_scores)
+        top_indices = np.argsort(-combined)[:k]
+        return [(self.documents[i], self.metadatas[i]) for i in top_indices]
 
 
 def retrieve(question, lang=None, mode=None):
