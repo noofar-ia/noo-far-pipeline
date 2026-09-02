@@ -12,4 +12,6 @@ QUESTIONS_TEST_WO = [
     {"question": "Lan mooy feebar bi gëna bari ci nag yi ?", "intent_attendu": "vaccination"},
     {"question": "Ban at la nag mëna am doom ?", "intent_attendu": "reproduction"},
     {"question": "Yan xeeti nag ñoo gën a méngoo ak klimaa bi ci Senegaal ?", "intent_attendu": "conduite_elevage"},
+
+    {"question": "Am naa ñaari litir meew. Ñaata laa leen mëna jaay ?", "intent_attendu": "hors_corpus"},
 ]
