@@ -16,11 +16,11 @@ Les animaux doivent être vaccinés contre la pasteurellose, la dermatose nodula
 
 ## Prophylaxie complémentaire
 
-En plus de la vaccination, un déparasitage régulier (lutte contre les insectes et les ectoparasites) est nécessaire pour limiter les maladies parasitaires. Chez les petits ruminants, les pneumopathies et les maladies gastro-intestinales parasitaires (strongyloses) sont les pathologies dominantes — un programme combinant vaccination et vermifugation améliore sensiblement les performances du troupeau.
+En plus de la vaccination, un déparasitage régulier (lutte contre les insectes et les ectoparasites) est nécessaire pour limiter les maladies parasitaires — voir fiche « Santé animale » pour le détail des pathologies parasitaires courantes chez les petits ruminants.
 
 ## Signes d'alerte
 
-Un animal fiévreux ou affaibli ne doit pas être vacciné — attendre son rétablissement avant d'administrer le vaccin.
+Un animal malade ou fiévreux ne doit pas être vacciné — attendre son rétablissement (voir fiche « Santé animale », section « Quand consulter un agent vétérinaire »).
 
 ---
 *Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; ISRA-IEMVT, Laboratoire national de l'élevage et de recherches vétérinaires, Prophylaxie chez les petits ruminants au Sénégal.*
