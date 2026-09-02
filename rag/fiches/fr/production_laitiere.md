@@ -9,6 +9,10 @@ La quantité de lait produite par une vache dépend de plusieurs facteurs combin
 - l'état de santé général de l'animal,
 - le rythme et la régularité de la traite.
 
+## Fréquence et régularité de la traite
+
+En système extensif traditionnel, la traite se limite souvent à une fois par jour, une grande partie du lait étant réservée au veau. Une traite plus régulière, si possible deux fois par jour à heures fixes, stimule la production et améliore sa stabilité — c'est un des leviers exploités par les programmes de stabulation partielle en saison sèche menés au Sénégal (Ferlo), qui combinent traite régulière et complémentation alimentaire pour soutenir la lactation. Un rythme irrégulier, à l'inverse, perturbe l'animal et fait baisser à la fois la quantité et la qualité du lait.
+
 ## Suivi de la production
 
 Des contrôles de performance périodiques doivent être effectués pour mesurer précisément les quantités de lait produites par chaque animal. Ce suivi permet d'identifier les meilleures productrices pour la sélection des futures reproductrices (voir fiche « Reproduction »).
@@ -22,4 +26,4 @@ Pour beaucoup d'éleveurs, le lait représente une valeur alimentaire, monétair
 Certaines coopératives laitières sénégalaises expérimentent des équipements modernes (comme les robots de traite, testés à Thiès) pour améliorer la régularité et l'hygiène de la traite — des innovations à adapter selon les moyens de chaque exploitation.
 
 ---
-*Sources : ISRA — Programmes de sélection du bovin N'Dama en Afrique de l'Ouest (Cahiers Agricultures, 2020) ; Ministère de l'Élevage du Sénégal.*
+*Sources : ISRA — Programmes de sélection du bovin N'Dama en Afrique de l'Ouest (Cahiers Agricultures, 2020) ; Ministère de l'Élevage du Sénégal ; ISRA-BAME, État des lieux de la filière lait et produits laitiers au Sénégal (Infoconseil, 2005).*

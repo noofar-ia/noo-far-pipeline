@@ -8,6 +8,10 @@ Pour un bovin adulte, les niveaux de consommation prévus par jour sont :
 
 Ces quantités doivent être ajustées selon le poids de l'animal, son état physiologique (gestation, lactation) et la disponibilité locale des ressources.
 
+## Besoins spécifiques en lactation
+
+Une vache en lactation a des besoins alimentaires plus élevés qu'une vache tarie, en particulier en énergie — produire du lait coûte des ressources que la ration doit compenser, sans quoi la production chute et la fertilité se dégrade (voir fiche « Reproduction »). En système extensif sahélien, la contrainte principale reste le manque de fourrage de qualité en saison sèche : les stratégies de complémentation (concentré, résidus de récolte, niébé fourrager) doivent cibler en priorité les animaux en lactation plutôt que l'ensemble du troupeau, pour un effet mesurable sur la production.
+
 ## Fourrages disponibles localement
 
 Plusieurs ressources fourragères locales sont recommandées pour compléter l'alimentation, en particulier en saison sèche :
@@ -24,4 +28,4 @@ Dans les élevages familiaux, les feuilles de neem sont traditionnellement utili
 Une alimentation déséquilibrée (carence en fourrage ou en concentré) affecte directement la production laitière et les performances de reproduction — voir la fiche « Reproduction du bétail laitier » pour le lien entre poids, âge et mise à la reproduction.
 
 ---
-*Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; étude ISRA sur les pratiques alimentaires ; AICCRA (validation niébé 58-74).*
+*Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; étude ISRA sur les pratiques alimentaires ; AICCRA (validation niébé 58-74) ; IRA Mamadou, Optimisation de la production laitière et réduction de l'intervalle vêlage-vêlage chez la vache dans la zone périurbaine de Bobo-Dioulasso (IDR-UPB, 2015 — contexte sahélien, Burkina Faso, comparable, non spécifique au Sénégal).*
