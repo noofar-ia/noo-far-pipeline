@@ -41,5 +41,6 @@ secrets/
 .DS_Store
 Thumbs.db
 desktop.ini
+CLAUDE.md
 
 nlu/results/
