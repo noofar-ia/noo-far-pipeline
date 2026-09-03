@@ -1,26 +1,26 @@
 # Ñaq ak fàggu baayima yi
 
-## Feebaru noyyig
+## Feebaru njëkk yiñ wara saytu
 
-Pneumopathies (feebaru noyyig) bokk nañu ci feebar yiy gëna jàpp baayima yu ndaw yi ci Senegal. Dañuy faral di lëkkaloo ak anam wi ñuy yar baayima yi (ñu bari ay doomi jàmbur, ventilation bu baaxul ci biir néeg bi) ak jamono ji (coppite yi ci klimaa bi).
+Feebaru baayima yiy gëna joxe jàngoro ci Senegal te ñu am prograami ñakk yu yaatu ñooy:
 
-## Feebaru mbàq yiy bawoo ci parasit
+- **Pleuropneumonie nag buy joxe jàngoro (CBPP)** — nag
+- **Feebaru der buy lëndëm** — nag
+- **Barab yu ndaw yi (PPR)** — baayima ak bëy
+- **Feebaru tànk ak gémmiñ** — nag
+- **Pasteurellose** — nag ak baayima yu ndaw yuy dundee
 
-Strongylosis (parasit yi ci biir) mooy beneen sabab bi gëna waral feebar ci baayima yu ndaw yi. Prograam bu boole deworming ak ñakk saa yu nekk dafay gëna baaxal xéewali zootechnique yu baayima yi (diisaay, màgg, njuram).
 
-## Pleuropneumonie nag buy joxe jàngoro (CBPP)
+## Jamonoy ñakk yi
+Dañu wara ñaq baayima yi ci pasteurellose, feebaru der bu am ay gënn, feebaru tànk ak gémmiñ, ak bépp feebar bu mëna jur loraange ci barab bi. Ministère bi yor baayima yi ñooy amal kàmpaañu ñakku mbaam xuux ak feebaru tànk ak gémmiñ; laajal veterineer bi ci dëkk bi bis yi.
 
-Feebaru nag bu war ñu diko saytu bu baax—amna ñu am feebar bu feeñaat ci Senegal. Dafay joxe feebar bi su baayima yi di laal seen biir, te mën na jur loraange yu bari ci géttu bu ñaquwul. Ñakk mooy xeetu fàggu bi gëna am solo.
+## Prophylaxie buy yokk
 
-## Kañ nga wara dem seeti veterineer
+Lu weesu ñakk, fàww ñuy faral di saytu parasit yi (di jàpp ci gunóor yi ak ectoparasit yi) ngir wàññi feebaru parasit yi—xoolal fiche bii di "Santé animale" ngir am ci yeneen leeral ci feebar yi parasit yi di faral di am ci baayima yu ndaw yi.
 
-Baayima bu wane màndarga yii dañu ko wara saytu ci saa si:
-- yaram wu tàng wala nelaw bu amul fenn,
-- sëqët wala jafe-jafe noyyi,
-- biir buy daw budul jeex,
-- gaawa wàññi yaram doonte dangay topp regime bu jaar yoon.
+## Màndarga yiy àrtu
 
-Bul musa ñaq baayima bu feebar wala bu am yaram wu tàng—xaaral mu wér (xoolal fiche bii di "Tàq ak Prophylaxie").
+Baayima bu feebar wala bu am yaram wu tàng waru ñu ko ñakk—xaaral ko mu wér (xoolal fiche bii di "Santé animale", wàll wi tuddu "Kañ nga wara dem seeti veterineer").
 
 ---
 *Sources : Ministère de l'Élevage du Sénégal (fiche technique GOANA Élevage) ; ISRA-IEMVT, Laboratoire national de l'élevage et de recherches vétérinaires, Prophylaxie chez les petits ruminants au Sénégal.*

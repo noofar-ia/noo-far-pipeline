@@ -5,7 +5,7 @@ rag/generator.py — Génération de réponse via LLM, à partir de passages RAG
 import gc
 import yaml
 from pathlib import Path
-from transformers import pipeline
+from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
 import torch
 
 _llm_cache = {}
@@ -61,18 +61,6 @@ Extraits :
 Question : {question}
 
 Réponse :""",
-
-    "wo": """Waxkat baat nga di jàppale baykati meew yi waa Senegal.
-Tontu laaj bi ci liñu bind ci suuf REKK.
-Sudee leeral yi nekkul ci pàcc yi, wax leen bu baax ni xamoo leen, bul xalaat dara.
-Tontu ci wolof, ci anam wu gàtt te ànd ak waxtaan (amul poñ bullet; tontu bu man a jàng ak baat bu kawe).
-
-Pàcc yi :
-{contexte}
-
-Laaj bi : {question}
-
-Tontu :""",
 }
 
 
@@ -86,8 +74,57 @@ def build_prompt(question, passages, lang="fr"):
     return gabarit.format(contexte=contexte, question=question)
 
 
+OOLEL_MODEL_NAME = "soynade-research/Oolel-v0.1"
+
+_oolel_cache = {}
+_system_wo_cache = None
+
+
+def _load_system_wo():
+    """Charge SYSTEM_WO depuis rag/prompts/system_wo.txt (une seule fois, mis en cache)."""
+    global _system_wo_cache
+    if _system_wo_cache is None:
+        system_wo_path = Path(__file__).parent / "prompts" / "system_wo.txt"
+        if not system_wo_path.exists():
+            raise FileNotFoundError(f"SYSTEM_WO introuvable : {system_wo_path}")
+        _system_wo_cache = system_wo_path.read_text(encoding="utf-8").strip()
+    return _system_wo_cache
+
+
+def get_oolel():
+    """Charge (ou récupère du cache) Oolel-v0.1 et son tokenizer, dédiés au wolof."""
+    if OOLEL_MODEL_NAME not in _oolel_cache:
+        print(f"Chargement d'Oolel : {OOLEL_MODEL_NAME}...")
+        tokenizer = AutoTokenizer.from_pretrained(OOLEL_MODEL_NAME)
+        model = AutoModelForCausalLM.from_pretrained(
+            OOLEL_MODEL_NAME, dtype=torch.float16, device_map="auto"
+        )
+        _oolel_cache[OOLEL_MODEL_NAME] = (model, tokenizer)
+    return _oolel_cache[OOLEL_MODEL_NAME]
+
+
+def generate_wo(question, passages):
+    """Génère une réponse en wolof via Oolel-v0.1 (chat template SYSTEM_WO + gabarit user validé)."""
+    model, tokenizer = get_oolel()
+    system_wo = _load_system_wo()
+    contexte = "\n\n".join(doc for doc, meta in passages)
+
+    messages = [
+        {"role": "system", "content": system_wo},
+        {"role": "user", "content": f"Xibaar bi:\n{contexte}\n\nLaaj bi: {question}"},
+    ]
+    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+
+    outputs = model.generate(**inputs, max_new_tokens=384, do_sample=False)
+    tokens_generes = outputs[0][inputs["input_ids"].shape[1]:]
+    return tokenizer.decode(tokens_generes, skip_special_tokens=True).strip()
+
+
 def generate(question, passages, lang="fr"):
     """Génère une réponse en langage naturel à partir de la question et des passages récupérés."""
+    if lang == "wo":
+        return generate_wo(question, passages)
     llm = get_llm(lang)
     prompt = build_prompt(question, passages, lang=lang)
     result = llm(prompt, max_new_tokens=150, temperature=0.3, do_sample=True)

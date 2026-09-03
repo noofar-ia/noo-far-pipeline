@@ -15,13 +15,13 @@ Senegal dafay njëkka bàyyi xel ci raas yu mëna xeex bekkoor ak feebar yu bawo
 
 ## Dëkkuwaay ak anam yi ñuy yar
 
-Dëkkuwaay bu baax dafay wàññi tasaaroo feebar bi (xoolal fiche "Wérgi-yaramu baayima yi") ba noppi gëna yombal baayima yi, suko defee ñu gëna mëna liggéey. Ventilation bu doy ak moytu ñu dajaloo nit ñi dina wàññi risku feebar yuy jàpp noyyig nit.
+Dëkkuwaay bu baax dafay wàññi tasaaroo feebar bi (xoolal fiche « Santé animale ») ba noppi gëna yombal baayima yi, suko defee ñu gëna mëna liggéey. Ventilation bu doy ak moytu ñu dajaloo nit ñi dina wàññi risku feebar yuy jàpp noyyig nit.
 
 ## Yoriinu géttu at mi yépp
 
 Li ñuy yar baayima yi dafa wara méngoo ak jamono yi:
-- **Jamonoy taw**: waajal ñàkkum ñax mu fere ak waajal ay reserve (residu mbay mi, ñax muñ denc—xoolal fiche "Lekk").
-- **Jamonoy taw**: jëfandikoo ñax mu am, waaye moytu feebar yiy bawoo ci parasit yi, ndax ñooy gëna bari ci jamonoy taw.
+- **Noor**: waajal ñàkkum ñax mu fere ak waajal ay reserve (residu mbay mi, ñax muñ denc—xoolal fiche « Alimentation »).
+- **Nawet**: jëfandikoo ñax mu am, waaye moytu feebar yiy bawoo ci parasit yi, ndax ñooy gëna bari ci jamonoy taw.
 
 ## Jumtukaayi jàppale
 

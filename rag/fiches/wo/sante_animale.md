@@ -20,7 +20,7 @@ Baayima bu wane màndarga yii dañu ko wara saytu ci saa si:
 - biir buy daw budul jeex,
 - gaawa wàññi yaram doonte dangay topp regime bu jaar yoon.
 
-Bul musa ñaq baayima bu feebar wala bu am yaram wu tàng—xaaral mu wér (xoolal fiche bii di "Tàq ak Prophylaxie").
+Bul musa ñaq baayima bu feebar wala bu am yaram wu tàng—xaaral mu wér (xoolal fiche bii di « Vaccination et prophylaxie »).
 
 ---
 *Sources : ISRA-IEMVT, Laboratoire national de l'élevage et de recherches vétérinaires ; ISRA, Fiches Techniques — Réémergence de la Péripneumonie Contagieuse Bovine (PPCB) au Sénégal.*
