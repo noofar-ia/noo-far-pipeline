@@ -10,6 +10,9 @@ from app.pipeline import process, load_config
 
 config = load_config()
 
+NOMS_LANGUE = {"fr": "français", "wo": "wolof", "ff": "pulaar"}
+nom_langue = NOMS_LANGUE.get(config["lang"], config["lang"])
+
 
 def traiter_audio(audio_path):
     """Fonction appelée par Gradio à chaque nouvel enregistrement/upload."""
@@ -41,7 +44,7 @@ demo = gr.Interface(
         gr.Textbox(label="Intent détecté (NLU)"),
         gr.Textbox(label="Réponse texte + latences"),
     ],
-    title="Ñoo Far — Démo prototype français",
+    title=f"Ñoo Far — Démo prototype ({nom_langue})",
     description="Pose une question sur l'élevage laitier, par micro ou fichier audio.",
 )
 
