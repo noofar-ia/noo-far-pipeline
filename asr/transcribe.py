@@ -5,6 +5,7 @@ Fonction principale : transcribe(wav_path, lang) -> texte
 Le modèle utilisé est déterminé par config/config.yaml (models.asr.<lang>).
 """
 
+import gc
 import yaml
 from pathlib import Path
 from transformers import pipeline
@@ -54,6 +55,17 @@ def transcribe(wav_path, lang="fr"):
     asr = get_asr_model(lang)
     result = asr(str(wav_path), return_timestamps=True)
     return result["text"]
+
+
+def unload_asr(lang=None):
+    """Libère le modèle ASR d'une langue précise, ou tous si lang est None."""
+    if lang:
+        _models_cache.pop(lang, None)
+    else:
+        _models_cache.clear()
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 if __name__ == "__main__":

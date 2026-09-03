@@ -6,6 +6,7 @@ tts/synthesize.py — Synthèse vocale, routée par famille de modèle.
 Contrat de sortie identique pour les deux : (audio: np.ndarray, sr: int).
 """
 
+import gc
 import yaml
 from pathlib import Path
 import torch
@@ -103,6 +104,17 @@ def synthesize(texte, lang=None, output_path=None):
         sf.write(str(output_path), audio, sr)
 
     return audio, sr
+
+
+def unload_tts(lang=None):
+    """Libère le modèle TTS d'une langue précise, ou tous si lang est None."""
+    if lang:
+        _models_cache.pop(lang, None)
+    else:
+        _models_cache.clear()
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 if __name__ == "__main__":

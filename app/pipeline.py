@@ -8,12 +8,12 @@ import time
 
 import yaml
 
-from asr.transcribe import transcribe
+from asr.transcribe import transcribe, unload_asr
 from nlu.client import parse_intent
 from rag.retriever import retrieve
-from rag.generator import generate
+from rag.generator import generate, unload_llm
 from tts.frontend import preparer_pour_tts
-from tts.synthesize import synthesize
+from tts.synthesize import synthesize, unload_tts
 
 
 def load_config():
@@ -53,6 +53,7 @@ def process(audio_in_path, lang="fr"):
 
     # 2. ASR
     texte = transcribe(wav_path, lang=lang)
+    unload_asr(lang=lang)  # libère Whisper avant que RAG/génération ne montent en VRAM
     t2 = time.time()
 
     # 3. NLU — optionnel (B). intent_info non utilisé pour router ; modèle Rasa
@@ -67,6 +68,7 @@ def process(audio_in_path, lang="fr"):
     mode = config["rag"]["retrieval"][lang]
     passages = retrieve(texte, lang=lang, mode=mode)
     reponse_texte = generate(texte, passages, lang=lang)
+    unload_llm()  # libère le LLM (Oolel ou pipeline générique) avant que le TTS ne monte en VRAM
     t4 = time.time()
 
     # 5. Frontend texte (H) — verbalisation nombres, lexique, .lower() Kiriku.
@@ -78,6 +80,7 @@ def process(audio_in_path, lang="fr"):
     # 6. TTS
     audio_out_path = audio_in_path.parent / f"{audio_in_path.stem}_reponse.wav"
     synthesize(texte_tts, lang=lang, output_path=audio_out_path)
+    unload_tts(lang=lang)  # cible matérielle inconnue : on repart d'une VRAM vide à chaque requête
     t6 = time.time()
 
     return {

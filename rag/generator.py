@@ -38,12 +38,15 @@ def get_llm(lang="fr"):
 
 def unload_llm(model_name=None):
     """Libère un modèle précis, ou tous si model_name est None.
-    Nécessaire pour comparer deux LLM sans saturer la VRAM (Whisper large
-    est déjà chargé en amont)."""
+    Vide _llm_cache (chemin pipeline() générique) et _oolel_cache (chemin
+    Oolel dédié au wolof) — un seul point d'entrée pour décharger le LLM
+    quel que soit le chemin emprunté par generate()."""
     if model_name:
         _llm_cache.pop(model_name, None)
+        _oolel_cache.pop(model_name, None)
     else:
         _llm_cache.clear()
+        _oolel_cache.clear()
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
