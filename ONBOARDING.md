@@ -139,25 +139,42 @@ python --version          # doit afficher 3.10.x
 pip --version             # le chemin doit contenir ...noofar...
 ```
 
-Puis installe depuis le lock (versions exactes, reproduction à l'identique) :
+Puis installe depuis `requirements.txt` (bornes minimales, mis à jour au fil des
+imports réels du code) :
 
 ```bash
 pip install --upgrade pip
-pip install -r requirements.lock.txt
+pip install -r requirements.txt
 ```
 
 > C'est long (torch + écosystème Hugging Face). Normal.
 
-### ⚠️ Correctif obligatoire — `datasets` et torchcodec sur Windows
+> `requirements.lock.txt` n'est **pas** destiné à l'install : c'est un snapshot
+> figé (versions exactes) d'un environnement Kaggle qui a fonctionné pour
+> RAG/génération (D1). Sert de référence en cas de régression à isoler, pas de
+> source d'install courante.
 
-Les versions récentes de `datasets` (≥ 4.0) utilisent **torchcodec** pour décoder
-l'audio, qui est **instable sur Windows** (DLL FFmpeg introuvables/incompatibles →
-erreurs à l'import ou au chargement d'un dataset audio). Forcer une version
-antérieure règle le problème sans rien perdre en fonctionnalité pour ce projet :
+`peft` (fine-tuning LoRA) et `twilio`/`httpx` (canal WhatsApp) ne sont plus dans
+`requirements.txt` : aucun code actuel ne les importe (`asr/train_lora.py` et
+`app/channels/whatsapp.py` sont vides). À réintroduire avec leurs contraintes de
+version quand ce code sera écrit.
+
+### ⚠️ À anticiper — `datasets` et torchcodec sur Windows
+
+`datasets` n'est pas dans `requirements.txt` aujourd'hui (aucun import dans le
+code de production — seulement prévu pour un futur fine-tuning). Quand il sera
+réintroduit, attention : les versions récentes (≥ 4.0) utilisent **torchcodec**
+pour décoder l'audio, qui est **instable sur Windows** (DLL FFmpeg
+introuvables/incompatibles → erreurs à l'import ou au chargement d'un dataset
+audio). Forcer une version antérieure règle le problème sans rien perdre en
+fonctionnalité pour ce projet :
 
 ```bash
 pip install "datasets<4.0"
 ```
+
+> Le lock Kaggle (`requirements.lock.txt`) a validé `datasets==5.0.0` — ça
+> fonctionne là-bas (Linux) mais **pas** la contrainte à reprendre sous Windows.
 
 Vérifie que le décodage audio automatique fonctionne :
 ```bash
@@ -167,6 +184,11 @@ python -c "from datasets import load_dataset; ds = load_dataset('PolyAI/minds14'
 Si ça affiche `OK: (N,) 8000` sans erreur, c'est bon. Si l'erreur `ASN1: NOT_ENOUGH_DATA`
 apparaît à la place, ce n'est **pas** un problème `datasets` — voir l'encadré SSL
 plus bas.
+
+> Note connexe : `coqui-tts` (backend Kiriku, dans `requirements.txt`) requiert
+> lui aussi `torchcodec` pour son IO audio (depuis torch 2.9), indépendamment de
+> `datasets`. La même instabilité Windows peut donc resurgir par ce chemin TTS
+> même sans jamais installer `datasets` — à surveiller au premier run TTS réel.
 
 ---
 
