@@ -1,28 +1,30 @@
-# ── Cœur ML (ASR, traduction NLLB, TTS) ──
-torch
-transformers
-accelerate
-datasets
-sentencepiece          # tokenizer NLLB-200
-peft                   # fine-tuning LoRA (asr/train_lora.py)
+# ── Cœur ML (ASR, RAG, TTS) ──
+torch>=2.9              # plancher requis par coqui-tts (IO audio torchcodec) — tts/synthesize.py
+transformers>=5.0,<6.0  # dtype= (remplace torch_dtype=) ; shim isin_mps_friendly pour coqui-tts — rag/generator.py, tts/synthesize.py
+accelerate>=1.14
+torchao>=0.16           # requis pour charger Whosper (ASR) sous transformers v5 — asr/transcribe.py
+sentencepiece>=0.2      # tokenizer NLLB-200
 
 # ── Audio ──
-soundfile
-librosa
+soundfile>=0.14
+librosa>=0.11
+pandas>=2.3             # asr/prepare_audio.py
+TTS                     # coqui-tts, backend Kiriku — tts/synthesize.py::_load_kiriku(). Pas de version de référence connue (absent du snapshot Kaggle) : à valider et épingler au premier run TTS réel.
+torchcodec              # IO audio requise par coqui-tts depuis torch 2.9. Aucune version connue comme stable sous Windows (DLL FFmpeg — voir ONBOARDING.md) : à valider et épingler au premier run TTS réel.
 
 # ── RAG (rag/) ──
-chromadb
-rank-bm25
-sentence-transformers
+chromadb>=1.5
+rank-bm25>=0.2
+sentence-transformers>=5.6   # dépendance transitive de chromadb.utils.embedding_functions (rag/indexer.py, rag/retriever.py) — aucun import direct
 
 # ── Application (app/) ──
-fastapi
-uvicorn[standard]
-python-multipart       # réception de fichiers dans le webhook
-gradio
-httpx                  # appels HTTP : Rasa, Twilio, médias WhatsApp
+fastapi>=0.138
+uvicorn[standard]>=0.49
+python-multipart>=0.0.32     # réception de fichiers dans le webhook
+gradio>=6.19
+requests>=2.34          # app/channels/telegram.py, app/webhook_test.py
+huggingface_hub>=1.20   # tts/synthesize.py::_load_kiriku() (snapshot_download)
 
 # ── Intégrations & config ──
-twilio
-pyyaml                 # config/config.yaml
-python-dotenv          # config/.env
+pyyaml>=6.0             # config/config.yaml
+python-dotenv>=1.2      # config/.env
