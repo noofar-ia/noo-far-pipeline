@@ -31,7 +31,7 @@ def get_llm(lang="fr"):
             "text-generation",
             model=model_name,
             device=device,
-            torch_dtype=torch.float16 if device == 0 else torch.float32
+            dtype=torch.float16 if device == 0 else torch.float32
         )
     return _llm_cache[model_name]
 
