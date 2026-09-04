@@ -52,8 +52,11 @@ def process(audio_in_path, lang="fr"):
     t1 = time.time()
 
     # 2. ASR
-    texte = transcribe(wav_path, lang=lang)
-    unload_asr(lang=lang)  # libère Whisper avant que RAG/génération ne montent en VRAM
+    try:
+        texte = transcribe(wav_path, lang=lang)
+    finally:
+        # libère Whisper avant que RAG/génération ne montent en VRAM — y compris si transcribe() échoue
+        unload_asr(lang=lang)
     t2 = time.time()
 
     # 3. NLU — optionnel (B). intent_info non utilisé pour router ; modèle Rasa
@@ -67,8 +70,11 @@ def process(audio_in_path, lang="fr"):
     # 4. RAG — mode de retrieval par langue (G), lang transmis à generate (D)
     mode = config["rag"]["retrieval"][lang]
     passages = retrieve(texte, lang=lang, mode=mode)
-    reponse_texte = generate(texte, passages, lang=lang)
-    unload_llm()  # libère le LLM (Oolel ou pipeline générique) avant que le TTS ne monte en VRAM
+    try:
+        reponse_texte = generate(texte, passages, lang=lang)
+    finally:
+        # libère le LLM (Oolel ou pipeline générique) avant que le TTS ne monte en VRAM — y compris si generate() échoue
+        unload_llm()
     t4 = time.time()
 
     # 5. Frontend texte (H) — verbalisation nombres, lexique, .lower() Kiriku.
@@ -79,8 +85,11 @@ def process(audio_in_path, lang="fr"):
 
     # 6. TTS
     audio_out_path = audio_in_path.parent / f"{audio_in_path.stem}_reponse.wav"
-    synthesize(texte_tts, lang=lang, output_path=audio_out_path)
-    unload_tts(lang=lang)  # cible matérielle inconnue : on repart d'une VRAM vide à chaque requête
+    try:
+        synthesize(texte_tts, lang=lang, output_path=audio_out_path)
+    finally:
+        # cible matérielle inconnue : on repart d'une VRAM vide à chaque requête — y compris si synthesize() échoue
+        unload_tts(lang=lang)
     t6 = time.time()
 
     return {
