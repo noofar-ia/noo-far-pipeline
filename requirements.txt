@@ -9,7 +9,7 @@ sentencepiece>=0.2      # tokenizer NLLB-200
 soundfile>=0.14
 librosa>=0.11
 pandas>=2.3             # asr/prepare_audio.py
-TTS                     # coqui-tts, backend Kiriku — tts/synthesize.py::_load_kiriku(). Pas de version de référence connue (absent du snapshot Kaggle) : à valider et épingler au premier run TTS réel.
+coqui-tts==0.27.5      # coqui-tts, backend Kiriku — tts/synthesize.py::_load_kiriku(). Version validée sur Kaggle (Python 3.12) le 4 sept. Le paquet "TTS" historique n'installe plus (borné <3.12).
 torchcodec              # IO audio requise par coqui-tts depuis torch 2.9. Aucune version connue comme stable sous Windows (DLL FFmpeg — voir ONBOARDING.md) : à valider et épingler au premier run TTS réel.
 
 # ── RAG (rag/) ──
