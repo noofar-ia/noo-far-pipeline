@@ -1,6 +1,6 @@
 # ── Cœur ML (ASR, RAG, TTS) ──
 torch>=2.9              # plancher requis par coqui-tts (IO audio torchcodec) — tts/synthesize.py
-transformers>=5.0,<6.0  # dtype= (remplace torch_dtype=) ; shim isin_mps_friendly pour coqui-tts — rag/generator.py, tts/synthesize.py
+transformers==5.1.0     # épinglé : certaines versions 5.0.x cassent l'ASR (KeyError 'num_frames' dans automatic_speech_recognition.py::preprocess, tout modèle Whisper, confirmé avec openai/whisper-tiny) ; 5.1.0 validé pour ASR + génération Oolel — dtype= (remplace torch_dtype=) ; shim isin_mps_friendly pour coqui-tts — rag/generator.py, tts/synthesize.py
 accelerate>=1.14
 torchao>=0.16           # requis pour charger Whosper (ASR) sous transformers v5 — asr/transcribe.py
 sentencepiece>=0.2      # tokenizer NLLB-200
